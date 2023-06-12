@@ -1,8 +1,5 @@
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.util.Duration;
 
 public class Enemy {
 
@@ -29,6 +26,14 @@ public class Enemy {
 
     public ImageView getImageView() {
         return imageView;
+    }
+    
+    public double getX() {
+    	return x;
+    }
+    
+    public double getY() {
+    	return y;
     }
 }
 

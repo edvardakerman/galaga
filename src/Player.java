@@ -13,6 +13,7 @@ public class Player {
     private final double width = 40;
     private final double height = 40;
     private boolean shooting = false;
+    private int score = 0;
 
     public Player(double x, double y) {
         this.x = x;
@@ -67,21 +68,29 @@ public class Player {
         imageView.setX(x);
     }
 
-    public void shoot() {
+    public void shoot(Enemy enemy) {
         if (!shooting) {
             shooting = true;
             double laserBeamX = x + width / 2 - laserBeamView.getFitWidth() / 2;
             double laserBeamY = y - laserBeamView.getFitHeight();
             laserBeamView.setX(laserBeamX);
             laserBeamView.setY(laserBeamY);
-            startLaserBeamAnimation();
+            startLaserBeamAnimation(enemy);
         }
     }
 
-    private void startLaserBeamAnimation() {
+    private void startLaserBeamAnimation(Enemy enemy) {
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(10), event -> {
             double laserBeamY = laserBeamView.getY();
-            if (laserBeamY > 0) {
+            double laserBeamX = laserBeamView.getX();
+            
+            if (laserBeamY == enemy.getY() && laserBeamX == (enemy.getX() + width / 2 - laserBeamView.getFitWidth() / 2)) {
+                this.score++;
+                System.out.println(score);
+                shooting = false;
+                laserBeamView.setX(-100);
+                laserBeamView.setY(-100);
+            } else if (laserBeamY > 0) {
                 laserBeamY -= 2;
                 laserBeamView.setY(laserBeamY);
             } else {

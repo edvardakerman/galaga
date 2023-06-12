@@ -18,8 +18,8 @@ public class Main extends Application {
         scene.setFill(javafx.scene.paint.Color.BLACK);
 
         // Create player
-        Player player = new Player(scene.getWidth() / 2, scene.getHeight() / 2);
-        Enemy enemy = new Enemy(scene.getWidth() / 2, 10);
+        Player player = new Player(200, 200);
+        Enemy enemy = new Enemy(200, 10);
 
         root.getChildren().addAll(player.getImageView(), player.getLaserBeamView(), enemy.getImageView());
 
@@ -39,7 +39,7 @@ public class Main extends Application {
                     player.moveRight();
                     break;
                 case SPACE:
-                    player.shoot();
+                    player.shoot(enemy);
                     break;
                 default:
                     break;
