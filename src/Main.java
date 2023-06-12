@@ -7,14 +7,23 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Pane root = new Pane();
-        Scene scene = new Scene(root, 400, 400);
+        
+    	// Create pane
+    	Pane root = new Pane();
+        
+    	// Create the scene
+    	Scene scene = new Scene(root, 400, 400);
+        
+    	// Set background color
         scene.setFill(javafx.scene.paint.Color.BLACK);
 
+        // Create player
         Player player = new Player(scene.getWidth() / 2, scene.getHeight() / 2);
+        Enemy enemy = new Enemy(scene.getWidth() / 2, 10);
 
-        root.getChildren().addAll(player.getImageView(), player.getLaserBeamView());
+        root.getChildren().addAll(player.getImageView(), player.getLaserBeamView(), enemy.getImageView());
 
+        // Key event handlers
         scene.setOnKeyPressed(e -> {
             switch (e.getCode()) {
                 case UP:
@@ -37,6 +46,7 @@ public class Main extends Application {
             }
         });
 
+        // Show stage & set title
         primaryStage.setTitle("Galactica!");
         primaryStage.setScene(scene);
         primaryStage.show();

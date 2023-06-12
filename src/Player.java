@@ -90,7 +90,7 @@ public class Player {
                 laserBeamView.setY(-100);
             }
         }));
-        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.setCycleCount((int)y);
         timeline.play();
     }
 }
