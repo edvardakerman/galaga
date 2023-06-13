@@ -1,105 +1,130 @@
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
+import Constants.Constants;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.util.Duration;
 
 public class Player {
 
-    private ImageView imageView;
+    private ImageView playerImageView;
     private ImageView laserBeamView;
-    private double x;
-    private double y;
-    private final double width = 40;
-    private final double height = 40;
+    private double playerX;
+    private double playerY;
+    private double playerWidth = 40;
+    private double playerHeight = 40;
+    private double playerSpeed = 10;
+    private double laserSpeed = 6;
     private boolean shooting = false;
     private int score = 0;
 
-    public Player(double x, double y) {
-        this.x = x;
-        this.y = y;
-        createImageView();
-        createLaserBeamView();
-    }
+    public Player() {
+        playerX = 180;
+        playerY = 350;
 
-    private void createImageView() {
-        Image image = new Image("https://art.pixilart.com/02d5fee1a00ae6b.png");
-        imageView = new ImageView(image);
-        imageView.setX(x);
-        imageView.setY(y);
-        imageView.setFitWidth(width);
-        imageView.setFitHeight(height);
+		try {
+			Image playerImage = new Image(new FileInputStream(Constants.playerImg));
+	        playerImageView = new ImageView(playerImage);
+	        playerImageView.setX(playerX);
+	        playerImageView.setY(playerY);
+	        playerImageView.setFitWidth(playerWidth);
+	        playerImageView.setFitHeight(playerHeight);
+	        createLaserBeamView();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
-
+    
     private void createLaserBeamView() {
-        Image laserBeamImage = new Image("https://pixelartmaker-data-78746291193.nyc3.digitaloceanspaces.com/image/8c8b1d81151796e.png");
-        laserBeamView = new ImageView(laserBeamImage);
-        laserBeamView.setX(-100);
-        laserBeamView.setY(-100);
-        laserBeamView.setFitWidth(10);
-        laserBeamView.setFitHeight(40);
+		try {
+			Image laserBeamImage = new Image(new FileInputStream(Constants.laserImg));
+	        laserBeamView = new ImageView(laserBeamImage);
+	        laserBeamView.setX(-100);
+	        laserBeamView.setY(-100);
+	        laserBeamView.setFitWidth(10);
+	        laserBeamView.setFitHeight(40);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
-    public ImageView getImageView() {
-        return imageView;
+    public ImageView getPlayerImageView() {
+        return playerImageView;
     }
 
     public ImageView getLaserBeamView() {
         return laserBeamView;
     }
-
+    
     public void moveUp() {
-        y -= 10;
-        imageView.setY(y);
-    }
-
-    public void moveDown() {
-        y += 10;
-        imageView.setY(y);
-    }
-
-    public void moveLeft() {
-        x -= 10;
-        imageView.setX(x);
-    }
-
-    public void moveRight() {
-        x += 10;
-        imageView.setX(x);
-    }
-
-    public void shoot(Enemy enemy) {
-        if (!shooting) {
-            shooting = true;
-            double laserBeamX = x + width / 2 - laserBeamView.getFitWidth() / 2;
-            double laserBeamY = y - laserBeamView.getFitHeight();
-            laserBeamView.setX(laserBeamX);
-            laserBeamView.setY(laserBeamY);
-            startLaserBeamAnimation(enemy);
+        if (playerY > 10) {
+            playerY -= playerSpeed;
+            playerImageView.setY(playerY);
         }
     }
 
-    private void startLaserBeamAnimation(Enemy enemy) {
-        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(10), event -> {
-            double laserBeamY = laserBeamView.getY();
-            double laserBeamX = laserBeamView.getX();
-            
-            if (laserBeamY == enemy.getY() && laserBeamX == (enemy.getX() + width / 2 - laserBeamView.getFitWidth() / 2)) {
-                this.score++;
-                System.out.println(score);
-                shooting = false;
-                laserBeamView.setX(-100);
-                laserBeamView.setY(-100);
-            } else if (laserBeamY > 0) {
-                laserBeamY -= 2;
-                laserBeamView.setY(laserBeamY);
-            } else {
-                shooting = false;
-                laserBeamView.setX(-100);
-                laserBeamView.setY(-100);
-            }
-        }));
-        timeline.setCycleCount((int)y);
-        timeline.play();
+    public void moveDown() {
+        if (playerY < 360) {
+            playerY += playerSpeed;
+            playerImageView.setY(playerY);
+        }
     }
+
+    public void moveLeft() {
+        if (playerX > 10) {
+            playerX -= playerSpeed;
+            playerImageView.setX(playerX);
+        }
+    }
+
+    public void moveRight() {
+        if (playerX < 360) {
+            playerX += playerSpeed;
+            playerImageView.setX(playerX);
+        }
+    }
+
+    public void shootLaserBeam() {
+        if (!shooting) {
+        	shooting = true;
+            double laserBeamX = playerX + playerWidth / 2 - laserBeamView.getFitWidth() / 2;
+            double laserBeamY = playerY - laserBeamView.getFitHeight();
+            laserBeamView.setX(laserBeamX);
+            laserBeamView.setY(laserBeamY);
+        }
+    }
+    
+    public void moveLaserBeam() {    	
+    	if (laserBeamView.getY() >= -30) {
+    		laserBeamView.setY(laserBeamView.getY() - laserSpeed);
+    	} else {
+    		shooting = false;
+    	}
+        
+    }
+
+    public boolean enemyHit(Enemy enemy) {
+        // Logic to check collision with an enemy
+    	boolean hit = false;
+    	
+    	if (shooting) {
+        	if (laserBeamView.getX() >=  enemy.getX() && laserBeamView.getX() <= (enemy.getX() + 40))  {
+            	if (laserBeamView.getY() >=  enemy.getY() && laserBeamView.getY() <= (enemy.getY() + 40))  {
+            		shooting = false;
+        	        laserBeamView.setX(-100);
+        	        laserBeamView.setY(-100);
+            		hit = true;
+            		score = getScore() + 1;
+            	}
+        	}
+    	}
+    	
+    	return hit;
+    }
+
+	public int getScore() {
+		return score;
+	}
 }

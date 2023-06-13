@@ -1,39 +1,59 @@
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
+import Constants.Constants;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class Enemy {
 
-    private ImageView imageView;
-    private double x;
-    private double y;
-    private final double width = 40;
-    private final double height = 40;
+    private ImageView enemyImageView;
+    private double enemyX;
+    private double enemyY;
+    private double enemyWidth = 40;
+    private double enemyHeight = 40;
+    private double enemySpeed = 0.5;
 
     public Enemy(double x, double y) {
-        this.x = x;
-        this.y = y;
-        createImageView();
-    }
+        enemyX = x;
+        enemyY = y;
 
-    private void createImageView() {
-        Image image = new Image("https://pixelartmaker-data-78746291193.nyc3.digitaloceanspaces.com/image/03ce464db711efb.png");
-        imageView = new ImageView(image);
-        imageView.setX(x);
-        imageView.setY(y);
-        imageView.setFitWidth(width);
-        imageView.setFitHeight(height);
-    }
-
-    public ImageView getImageView() {
-        return imageView;
+		try {
+			Image enemyImage = new Image(new FileInputStream(Constants.enemyImg));
+	        enemyImageView = new ImageView(enemyImage);
+	        enemyImageView.setX(enemyX);
+	        enemyImageView.setY(enemyY);
+	        enemyImageView.setFitWidth(enemyWidth);
+	        enemyImageView.setFitHeight(enemyHeight);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
     
     public double getX() {
-    	return x;
+    	return enemyX;
     }
     
     public double getY() {
-    	return y;
+    	return enemyY;
+    }
+
+    public ImageView getEnemyImageView() {
+        return enemyImageView;
+    }
+
+    public void move() {
+        enemyY += enemySpeed;
+        enemyImageView.setY(enemyY);
+    }
+    
+    public boolean collidesWith() {
+        // Logic to check collision with an wall
+    	if (this.enemyY == 400) {
+    		return true;
+    	} else {
+    		return false;
+    	}
     }
 }
-
