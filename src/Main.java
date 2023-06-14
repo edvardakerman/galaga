@@ -3,6 +3,9 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,10 +19,19 @@ public class Main extends Application {
     private double screenHeight = 400;
     private Player player;
     private List<Enemy> enemies;
+    private Text scoreText, livesText;
 
     
     public void start(Stage primaryStage) {
         root = new Pane();
+        
+        livesText = createText(10, 20, "Lives: " + 3);
+        root.getChildren().add(livesText);
+
+        scoreText = createText(10, 50, "Score: " + 0);
+        root.getChildren().add(scoreText);
+        
+        
         scene = new Scene(root, screenWidth, screenHeight);
         scene.setFill(javafx.scene.paint.Color.BLACK);
 
@@ -73,16 +85,15 @@ public class Main extends Application {
                     
                     if (player.enemyHit(enemy)) {
                     	root.getChildren().remove(enemy.getEnemyImageView());
-                    	System.out.println("Hit! " + player.getScore());
                     	enemyTmp = enemy;
+                    	scoreText.setText("Score: " + player.getScore());
                     }
                     
                     if (enemy.collidesWith()) {
                     	root.getChildren().remove(enemy.getEnemyImageView());
-                    	System.out.println("Enemy ship slipt by!");
                     	enemyTmp = enemy;
                     	player.setLives(player.getLives()-1);
-                    	System.out.println("Lives: "+ player.getLives());
+                    	livesText.setText("Lives: " + player.getLives());
                     }
                 }
             	enemies.remove(enemyTmp);
@@ -93,6 +104,13 @@ public class Main extends Application {
         primaryStage.setTitle("Galactica!");
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+    
+    private Text createText(double x, double y, String text) {
+        Text t = new Text(x, y, text);
+        t.setFont(Font.font("Arial", 18));
+        t.setFill(Color.WHITE);
+        return t;
     }
 
     public static void main(String[] args) {

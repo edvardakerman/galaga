@@ -50,7 +50,7 @@ public class Enemy {
     
     public boolean collidesWith() {
         // Logic to check collision with an wall
-    	if (this.enemyY == 400) {
+    	if (this.enemyY >= 400) {
     		return true;
     	} else {
     		return false;
