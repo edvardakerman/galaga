@@ -26,14 +26,13 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         root = new Pane();
         
-        livesText = createText(10, 20, "Lives: " + 3);
-        root.getChildren().add(livesText);
-        
-        gameOverText = createText(screenWidth / 2, screenHeight / 2, "Game Over");
+        gameOverText = createText(screenWidth / 2 -50, screenHeight / 2 -20, "Game Over");
 
         scoreText = createText(10, 50, "Score: " + 0);
         root.getChildren().add(scoreText);
         
+        livesText = createText(10, 20, "Lives: " + 3);
+        root.getChildren().add(livesText);
         
         scene = new Scene(root, screenWidth, screenHeight);
         scene.setFill(javafx.scene.paint.Color.BLACK);
