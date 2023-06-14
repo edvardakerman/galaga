@@ -1,3 +1,4 @@
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -13,8 +14,9 @@ public class Menu extends VBox {
     public Menu() {
         setStyle("-fx-background-color: #222222;");
         setSpacing(20);
+        setAlignment(Pos.CENTER);
         
-        welcomeText = new Text(180, 50, "Welcome to Galactica!!");
+        welcomeText = new Text("Welcome to Galactica!!");
         welcomeText.setFont(Font.font("Arial", 18));
         welcomeText.setFill(Color.WHITE);
 
