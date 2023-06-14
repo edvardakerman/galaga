@@ -19,7 +19,8 @@ public class Main extends Application {
     private double screenHeight = 400;
     private Player player;
     private List<Enemy> enemies;
-    private Text scoreText, livesText;
+    private Text scoreText, livesText, gameOverText;
+    private boolean isGameOver = false;
 
     
     public void start(Stage primaryStage) {
@@ -27,6 +28,8 @@ public class Main extends Application {
         
         livesText = createText(10, 20, "Lives: " + 3);
         root.getChildren().add(livesText);
+        
+        gameOverText = createText(screenWidth / 2, screenHeight / 2, "Game Over");
 
         scoreText = createText(10, 50, "Score: " + 0);
         root.getChildren().add(scoreText);
@@ -60,6 +63,10 @@ public class Main extends Application {
 
             @Override
             public void handle(long now) {
+            	if (isGameOver) {
+                    root.getChildren().add(gameOverText);
+            		this.stop();
+            	}
                 spawnEnemy(now);
                 moveEntities();
                 
@@ -77,6 +84,7 @@ public class Main extends Application {
             }
 
             private void moveEntities() {
+            	
                 player.moveLaserBeam();
                 
                 Enemy enemyTmp = new Enemy(-100, -100);
@@ -94,6 +102,10 @@ public class Main extends Application {
                     	enemyTmp = enemy;
                     	player.setLives(player.getLives()-1);
                     	livesText.setText("Lives: " + player.getLives());
+                        if (player.getLives() == 0) {
+                            stopGame();
+                            break;
+                        }
                     }
                 }
             	enemies.remove(enemyTmp);
@@ -111,6 +123,11 @@ public class Main extends Application {
         t.setFont(Font.font("Arial", 18));
         t.setFill(Color.WHITE);
         return t;
+    }
+    
+    private void stopGame() {
+        isGameOver = true;
+        // Additional logic to handle game over
     }
 
     public static void main(String[] args) {
