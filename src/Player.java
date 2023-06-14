@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import Constants.Constants;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 
 public class Player {
 
@@ -49,6 +50,20 @@ public class Player {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+    }
+    
+    public void handleKeyPress(KeyCode keyCode) {
+        if (keyCode == KeyCode.UP) {
+            moveUp();
+        } else if (keyCode == KeyCode.DOWN) {
+            moveDown();
+        } else if (keyCode == KeyCode.LEFT) {
+            moveLeft();
+        } else if (keyCode == KeyCode.RIGHT) {
+            moveRight();
+        } else if (keyCode == KeyCode.SPACE) {
+            shootLaserBeam();
+        }
     }
 
     public ImageView getPlayerImageView() {
