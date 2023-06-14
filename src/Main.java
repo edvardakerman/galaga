@@ -66,21 +66,26 @@ public class Main extends Application {
 
             private void moveEntities() {
                 player.moveLaserBeam();
+                
+                Enemy enemyTmp = new Enemy(-100, -100);
                 for (Enemy enemy : enemies) {
                     enemy.move();
                     
                     if (player.enemyHit(enemy)) {
                     	root.getChildren().remove(enemy.getEnemyImageView());
                     	System.out.println("Hit! " + player.getScore());
-                    	enemies.remove(enemy);
+                    	enemyTmp = enemy;
                     }
                     
                     if (enemy.collidesWith()) {
                     	root.getChildren().remove(enemy.getEnemyImageView());
                     	System.out.println("Enemy ship slipt by!");
-                    	enemies.remove(enemy);
+                    	enemyTmp = enemy;
+                    	player.setLives(player.getLives()-1);
+                    	System.out.println("Lives: "+ player.getLives());
                     }
                 }
+            	enemies.remove(enemyTmp);
             }
         };
         timer.start();

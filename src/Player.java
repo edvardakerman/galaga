@@ -17,6 +17,7 @@ public class Player {
     private double laserSpeed = 6;
     private boolean shooting = false;
     private int score = 0;
+    private int lives = 3;
 
     public Player() {
         playerX = 180;
@@ -126,5 +127,13 @@ public class Player {
 
 	public int getScore() {
 		return score;
+	}
+
+	public int getLives() {
+		return lives;
+	}
+
+	public void setLives(int lives) {
+		this.lives = lives;
 	}
 }
