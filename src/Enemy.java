@@ -60,6 +60,11 @@ public class Enemy {
     	}
     }
     
+    public boolean playerHit(Player player) {
+ 
+    	return false;
+    }
+    
     public ImageView getLaserBeamView() {
         return null;
     }

@@ -101,6 +101,15 @@ public class Game extends Pane {
                     	scoreText.setText("Score: " + player.getScore());
                     }
                     
+                    if (enemy.playerHit(player)) {
+                    	player.setLives(player.getLives()-1);
+                    	livesText.setText("Lives: " + player.getLives());
+                        if (player.getLives() == 0) {
+                            stopGame();
+                            break;
+                        }
+                    }
+                    
                     if (enemy.collidesWith()) {
                     	getChildren().remove(enemy.getEnemyImageView());
                     	enemyTmp = enemy;

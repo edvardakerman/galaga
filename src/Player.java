@@ -143,6 +143,10 @@ public class Player {
 	public int getScore() {
 		return score;
 	}
+	
+	public void setScore(int Score) {
+		this.score = Score;
+	}
 
 	public int getLives() {
 		return lives;

@@ -56,5 +56,23 @@ public class EnemyShooter extends Enemy{
     	}
 
     }
+    
+    public boolean playerHit(Player player) {
+        // Logic to check collision with an enemy
+    	boolean hit = false;
+    	
+    	if (shooting) {
+        	if (laserBeamView.getX() >=  player.getPlayerImageView().getX() && laserBeamView.getX() <= (player.getPlayerImageView().getX() + 40))  {
+            	if (laserBeamView.getY() <=  player.getPlayerImageView().getY() && laserBeamView.getY() >= (player.getPlayerImageView().getY() - 40))  {
+            		shooting = false;
+        	        laserBeamView.setX(-100);
+        	        laserBeamView.setY(-100);
+            		hit = true;
+            	}
+        	}
+    	}
+    	
+    	return hit;
+    }
 
 }
