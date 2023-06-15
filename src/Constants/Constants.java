@@ -4,10 +4,10 @@ package Constants;
 public interface Constants {
 	
 	// Images
-	String laserImg = "src/laser.png";
-	String playerImg = "src/player.png";
-	String enemyImg = "src/enemy.png";
-	String enemyShooterImg = "src/enemyShooter.png";
-	String heartImg = "src/heart.png";
-	String cherryImg = "src/cherry.png";
+	String laserImg = "src/Public/laser.png";
+	String playerImg = "src/Public/player.png";
+	String enemyImg = "src/Public/enemy.png";
+	String enemyShooterImg = "src/Public/enemyShooter.png";
+	String heartImg = "src/Public/heart.png";
+	String cherryImg = "src/Public/cherry.png";
 }

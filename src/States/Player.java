@@ -1,3 +1,4 @@
+package States;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
@@ -109,7 +110,6 @@ public class Player {
     }
 
     public boolean enemyHit(Enemy enemy) {
-        // Logic to check collision with an enemy
     	boolean hit = false;
     	
     	if (shooting) {

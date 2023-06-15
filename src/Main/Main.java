@@ -1,3 +1,6 @@
+package Main;
+import States.Game;
+import States.Menu;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -20,21 +23,23 @@ public class Main extends Application {
         primaryStage.setTitle("Game Menu");
         primaryStage.show();
     }
+    
 
-    private void createMenuScene() {
+    private void createMenuScene() {    	
         Menu menu = new Menu();
         menu.setOnStartGame(() -> {
+
             primaryStage.setScene(gameScene);
             primaryStage.setTitle("Game");
-            game.startGame();
+            game.startGame();      
             gameScene.setOnKeyPressed(event -> game.handleKeyPress(event.getCode()));
-            
+                       
         });
 
         menuScene = new Scene(menu, 400, 400);
     }
 
-    private void createGameScene() {
+    private void createGameScene() {   	
         game = new Game();
         gameScene = new Scene(game, 400, 400);
     }

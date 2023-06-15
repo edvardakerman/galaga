@@ -1,3 +1,4 @@
+package States;
 
 public class ExtraLifePowerUp extends PowerUp{
 	

@@ -1,3 +1,4 @@
+package States;
 import javafx.animation.AnimationTimer;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
@@ -42,20 +43,6 @@ public class Game extends Pane {
         
         ExtraScorePowerUp extraScorePowerUp = new ExtraScorePowerUp(-100, -100, Constants.cherryImg);
         getChildren().add(extraScorePowerUp.getPowerUpImageView());
-    
-        setOnKeyPressed(e -> {
-            if (e.getCode() == KeyCode.UP) {
-                player.moveUp();
-            } else if (e.getCode() == KeyCode.DOWN) {
-                player.moveDown();
-            } else if (e.getCode() == KeyCode.LEFT) {
-                player.moveLeft();
-            } else if (e.getCode() == KeyCode.RIGHT) {
-                player.moveRight();
-            } else if (e.getCode() == KeyCode.SPACE) {
-                player.shootLaserBeam();
-            }
-        });
 
         gameLoop = new AnimationTimer() {
             private long lastEnemySpawnTime, lastExtraLifePoweUpSpawnTime, lastExtraScorePoweUpSpawnTime  = 10;
@@ -190,6 +177,4 @@ public class Game extends Pane {
         highScore.saveScore(player.getScore());
     }
     
-
-  
 }
