@@ -9,4 +9,5 @@ public interface Constants {
 	String enemyImg = "src/enemy.png";
 	String enemyShooterImg = "src/enemyShooter.png";
 	String spaceImg = "src/space.png";
+	String heartImg = "src/heart.png";
 }

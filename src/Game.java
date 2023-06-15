@@ -52,7 +52,7 @@ public class Game extends Pane {
         });
 
         gameLoop = new AnimationTimer() {
-            private long lastEnemySpawnTime = 10;
+            private long lastEnemySpawnTime, lastPoweUpSpawnTime  = 10;
             private Random random = new Random();
        
 
@@ -63,11 +63,12 @@ public class Game extends Pane {
             		this.stop();
             	}
                 spawnEnemy(now);
+                spawnPowerUp(now);
                 moveEntities();
             }
 
             private void spawnEnemy(long now) {
-                if (now - lastEnemySpawnTime >= 2000000000) {                
+                if (now - lastEnemySpawnTime >= 3000000000L) {                
                     double enemyX = random.nextDouble() * (screenWidth - 40);
                     double enemyY = 0;
                     if (random.nextInt(10) + 1 > 5) {
@@ -84,6 +85,22 @@ public class Game extends Pane {
                     
                 }
             }
+            
+            private void spawnPowerUp(long now) {
+                if (now - lastPoweUpSpawnTime >= 30000000000L && player.getScore() > 1) {                
+                    double powerUpX = random.nextDouble() * (screenWidth - 40);
+                    double powerUpY = random.nextDouble((screenHeight-40)-(screenHeight/2)) + screenHeight/2;
+                    
+                    PowerUp powerUp;
+                    
+                    powerUp = new ExtraLifePowerUp(powerUpX, powerUpY, Constants.heartImg);
+                    getChildren().add(powerUp.getPowerUpImageView());
+                       
+                    lastPoweUpSpawnTime = now;
+                    
+                }
+            }
+            
 
             private void moveEntities() {
             	
