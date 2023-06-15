@@ -1,7 +1,6 @@
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-import Constants.Constants;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -14,12 +13,12 @@ public class Enemy {
     private double enemyHeight = 40;
     private double enemySpeed = 0.5;
 
-    public Enemy(double x, double y) {
+    public Enemy(double x, double y, String image) {
         enemyX = x;
         enemyY = y;
 
 		try {
-			Image enemyImage = new Image(new FileInputStream(Constants.enemyImg));
+			Image enemyImage = new Image(new FileInputStream(image));
 	        enemyImageView = new ImageView(enemyImage);
 	        enemyImageView.setX(enemyX);
 	        enemyImageView.setY(enemyY);

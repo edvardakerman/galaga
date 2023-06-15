@@ -4,6 +4,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import Constants.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +50,10 @@ public class Game extends Pane {
                 player.shootLaserBeam();
             }
         });
+        
+        EnemyShooter enemy = new EnemyShooter(200, 0, Constants.enemyShooterImg);
+        enemies.add(enemy);
+        getChildren().add(enemy.getEnemyImageView());
 
         gameLoop = new AnimationTimer() {
             private long lastEnemySpawnTime = 0;
@@ -69,7 +74,7 @@ public class Game extends Pane {
                 if (now - lastEnemySpawnTime >= 2000000000) {                
                     double enemyX = random.nextDouble() * (screenWidth - 40);
                     double enemyY = 0;
-                    Enemy enemy = new Enemy(enemyX, enemyY);
+                    Enemy enemy = new Enemy(enemyX, enemyY, Constants.enemyImg);
                     enemies.add(enemy);
                     getChildren().add(enemy.getEnemyImageView());
                     lastEnemySpawnTime = now;
@@ -81,7 +86,7 @@ public class Game extends Pane {
             	
                 player.moveLaserBeam();
                 
-                Enemy enemyTmp = new Enemy(-100, -100);
+                Enemy enemyTmp = new Enemy(-100, -100, Constants.enemyImg);
                 for (Enemy enemy : enemies) {
                     enemy.move();
                     
