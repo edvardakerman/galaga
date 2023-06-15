@@ -97,7 +97,7 @@ public class Game extends Pane {
             }
             
             private void spawnPowerUps(long now) {
-                if (now - lastExtraLifePoweUpSpawnTime >= 3000000000L && player.getLives() < 3) {                
+                if (now - lastExtraLifePoweUpSpawnTime >= 30000000000L && player.getLives() < 3) {                
                     double powerUpX = random.nextDouble() * (screenWidth - 40);
                     double powerUpY = random.nextDouble((screenHeight-40)-(screenHeight/2)) + screenHeight/2;
                     extraLifePowerUp.getPowerUpImageView().setX(powerUpX);
@@ -186,6 +186,10 @@ public class Game extends Pane {
 
     private void stopGame() {
         isGameOver = true;
+        HighScore highScore = new HighScore();
+        highScore.saveScore(player.getScore());
     }
+    
+
   
 }

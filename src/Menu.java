@@ -8,8 +8,9 @@ import javafx.scene.text.Text;
 public class Menu extends VBox {
 
     private Button startButton, exitButton;
-    private Text welcomeText;
+    private Text welcomeText, highScoreText;
     private Runnable onStartGame;
+    HighScore highScore = new HighScore();
 
     public Menu() {
         setStyle("-fx-background-color: #222222;");
@@ -19,6 +20,10 @@ public class Menu extends VBox {
         welcomeText = new Text("Welcome to Galactica!!");
         welcomeText.setFont(Font.font("Arial", 18));
         welcomeText.setFill(Color.WHITE);
+        
+        highScoreText = new Text("HighScore: " + highScore.getHighScore());
+        highScoreText.setFont(Font.font("Arial", 18));
+        highScoreText.setFill(Color.WHITE);
 
         startButton = new Button("Start Game");
         startButton.setOnAction(event -> {
@@ -32,7 +37,7 @@ public class Menu extends VBox {
         	System.exit(0);
         });
 
-        getChildren().addAll(welcomeText, startButton, exitButton);
+        getChildren().addAll(welcomeText, startButton, exitButton, highScoreText);
     }
 
     public void setOnStartGame(Runnable onStartGame) {
