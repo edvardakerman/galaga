@@ -33,7 +33,24 @@ public abstract class PowerUp {
     public ImageView getPowerUpImageView() {
         return powerUpImageView;
     }
+    
+    public boolean playerHit(Player player) {
+        // Logic to check collision with an enemy
+    	boolean hit = false;
+
+    	if (powerUpImageView.getX()+20 >=  player.getPlayerImageView().getX() && powerUpImageView.getX() <= (player.getPlayerImageView().getX()+20))  {
+        	if (powerUpImageView.getY() <=  player.getPlayerImageView().getY()+20 && powerUpImageView.getY()+20 >= (player.getPlayerImageView().getY()))  {
+        		powerUpImageView.setX(-100);
+        		powerUpImageView.setY(-100);
+        		hit = true;
+        		System.out.println("Yippi");
+        	}
+    	}
+    	return hit;
+    }
+    	
+    	
 	
-	public abstract void use();
+	public abstract void use(Player player);
 
 }

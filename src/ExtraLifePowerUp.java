@@ -6,8 +6,10 @@ public class ExtraLifePowerUp extends PowerUp{
 	}
 
 	@Override
-	public void use() {
+	public void use(Player player) {
 		// TODO Auto-generated method stub
-		
+    	if (this.playerHit(player)) {
+    		player.setLives(player.getLives()+1);
+    	}
 	}
 }

@@ -36,6 +36,9 @@ public class Game extends Pane {
 
         scoreText = createText(10, 50, "Score: " + player.getScore());
         getChildren().add(scoreText);
+        
+        ExtraLifePowerUp extraLifePowerUp = new ExtraLifePowerUp(-100, -100, Constants.heartImg);
+        getChildren().add(extraLifePowerUp.getPowerUpImageView());
     
         setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.UP) {
@@ -65,6 +68,9 @@ public class Game extends Pane {
                 spawnEnemy(now);
                 spawnPowerUp(now);
                 moveEntities();
+                extraLifePowerUp.use(player);
+                livesText.setText("Lives: " + player.getLives());
+            	scoreText.setText("Score: " + player.getScore());
             }
 
             private void spawnEnemy(long now) {
@@ -87,15 +93,11 @@ public class Game extends Pane {
             }
             
             private void spawnPowerUp(long now) {
-                if (now - lastPoweUpSpawnTime >= 30000000000L && player.getScore() > 1) {                
+                if (now - lastPoweUpSpawnTime >= 300000000000L && player.getLives() <= 3) {                
                     double powerUpX = random.nextDouble() * (screenWidth - 40);
                     double powerUpY = random.nextDouble((screenHeight-40)-(screenHeight/2)) + screenHeight/2;
-                    
-                    PowerUp powerUp;
-                    
-                    powerUp = new ExtraLifePowerUp(powerUpX, powerUpY, Constants.heartImg);
-                    getChildren().add(powerUp.getPowerUpImageView());
-                       
+                    extraLifePowerUp.getPowerUpImageView().setX(powerUpX);
+                    extraLifePowerUp.getPowerUpImageView().setY(powerUpY);
                     lastPoweUpSpawnTime = now;
                     
                 }
@@ -115,12 +117,11 @@ public class Game extends Pane {
                     if (player.enemyHit(enemy)) {
                     	getChildren().removeAll(enemy.getEnemyImageView(), enemy.getLaserBeamView());
                     	enemyTmp = enemy;
-                    	scoreText.setText("Score: " + player.getScore());
                     }
                     
                     if (enemy.playerHit(player)) {
                     	player.setLives(player.getLives()-1);
-                    	livesText.setText("Lives: " + player.getLives());
+                    	
                         if (player.getLives() == 0) {
                             stopGame();
                             break;
@@ -131,7 +132,6 @@ public class Game extends Pane {
                     	getChildren().remove(enemy.getEnemyImageView());
                     	enemyTmp = enemy;
                     	player.setLives(player.getLives()-1);
-                    	livesText.setText("Lives: " + player.getLives());
                         if (player.getLives() == 0) {
                             stopGame();
                             break;
