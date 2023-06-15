@@ -4,7 +4,6 @@ import java.io.FileNotFoundException;
 import Constants.Constants;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 
 public class Player {
 
@@ -19,6 +18,7 @@ public class Player {
     private boolean shooting = false;
     private int score = 0;
     private int lives = 3;
+    private int scoreMultiplier = 1;
 
     public Player() {
         playerX = 180;
@@ -52,19 +52,6 @@ public class Player {
 		}
     }
     
-    public void handleKeyPress(KeyCode keyCode) {
-        if (keyCode == KeyCode.UP) {
-            moveUp();
-        } else if (keyCode == KeyCode.DOWN) {
-            moveDown();
-        } else if (keyCode == KeyCode.LEFT) {
-            moveLeft();
-        } else if (keyCode == KeyCode.RIGHT) {
-            moveRight();
-        } else if (keyCode == KeyCode.SPACE) {
-            shootLaserBeam();
-        }
-    }
 
     public ImageView getPlayerImageView() {
         return playerImageView;
@@ -132,7 +119,7 @@ public class Player {
         	        laserBeamView.setX(-100);
         	        laserBeamView.setY(-100);
             		hit = true;
-            		score = getScore() + 1;
+            		setScore(1);
             	}
         	}
     	}
@@ -145,7 +132,15 @@ public class Player {
 	}
 	
 	public void setScore(int Score) {
-		this.score = Score;
+		this.score += Score * scoreMultiplier;
+	}
+	
+	public void setScoreMultiplier(int newValue) {
+		this.scoreMultiplier = newValue;
+	}
+	
+	public int getScoreMultiplie() {
+		return scoreMultiplier;
 	}
 
 	public int getLives() {

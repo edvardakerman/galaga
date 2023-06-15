@@ -58,7 +58,6 @@ public class EnemyShooter extends Enemy{
     }
     
     public boolean playerHit(Player player) {
-        // Logic to check collision with an enemy
     	boolean hit = false;
     	
     	if (shooting) {

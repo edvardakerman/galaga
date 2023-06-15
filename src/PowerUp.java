@@ -35,7 +35,7 @@ public abstract class PowerUp {
     }
     
     public boolean playerHit(Player player) {
-        // Logic to check collision with an enemy
+        // Logic to check collision with an player
     	boolean hit = false;
 
     	if (powerUpImageView.getX()+20 >=  player.getPlayerImageView().getX() && powerUpImageView.getX() <= (player.getPlayerImageView().getX()+20))  {
@@ -43,7 +43,6 @@ public abstract class PowerUp {
         		powerUpImageView.setX(-100);
         		powerUpImageView.setY(-100);
         		hit = true;
-        		System.out.println("Yippi");
         	}
     	}
     	return hit;

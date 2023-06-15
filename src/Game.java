@@ -39,6 +39,9 @@ public class Game extends Pane {
         
         ExtraLifePowerUp extraLifePowerUp = new ExtraLifePowerUp(-100, -100, Constants.heartImg);
         getChildren().add(extraLifePowerUp.getPowerUpImageView());
+        
+        ExtraScorePowerUp extraScorePowerUp = new ExtraScorePowerUp(-100, -100, Constants.cherryImg);
+        getChildren().add(extraScorePowerUp.getPowerUpImageView());
     
         setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.UP) {
@@ -55,7 +58,7 @@ public class Game extends Pane {
         });
 
         gameLoop = new AnimationTimer() {
-            private long lastEnemySpawnTime, lastPoweUpSpawnTime  = 10;
+            private long lastEnemySpawnTime, lastExtraLifePoweUpSpawnTime, lastExtraScorePoweUpSpawnTime  = 10;
             private Random random = new Random();
        
 
@@ -66,9 +69,10 @@ public class Game extends Pane {
             		this.stop();
             	}
                 spawnEnemy(now);
-                spawnPowerUp(now);
+                spawnPowerUps(now);
                 moveEntities();
                 extraLifePowerUp.use(player);
+                extraScorePowerUp.use(player);
                 livesText.setText("Lives: " + player.getLives());
             	scoreText.setText("Score: " + player.getScore());
             }
@@ -92,15 +96,25 @@ public class Game extends Pane {
                 }
             }
             
-            private void spawnPowerUp(long now) {
-                if (now - lastPoweUpSpawnTime >= 300000000000L && player.getLives() <= 3) {                
+            private void spawnPowerUps(long now) {
+                if (now - lastExtraLifePoweUpSpawnTime >= 3000000000L && player.getLives() < 3) {                
                     double powerUpX = random.nextDouble() * (screenWidth - 40);
                     double powerUpY = random.nextDouble((screenHeight-40)-(screenHeight/2)) + screenHeight/2;
                     extraLifePowerUp.getPowerUpImageView().setX(powerUpX);
                     extraLifePowerUp.getPowerUpImageView().setY(powerUpY);
-                    lastPoweUpSpawnTime = now;
+                    lastExtraLifePoweUpSpawnTime = now;
                     
                 }
+                
+                if (now - lastExtraScorePoweUpSpawnTime >= 30000000000L && player.getScore() >= 20) {                
+                    double powerUpX = random.nextDouble() * (screenWidth - 40);
+                    double powerUpY = random.nextDouble((screenHeight-40)-(screenHeight/2)) + screenHeight/2;
+                    extraScorePowerUp.getPowerUpImageView().setX(powerUpX);
+                    extraScorePowerUp.getPowerUpImageView().setY(powerUpY);
+                    lastExtraScorePoweUpSpawnTime = now;
+                    
+                }
+                	
             }
             
 
