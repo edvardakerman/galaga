@@ -50,13 +50,9 @@ public class Game extends Pane {
                 player.shootLaserBeam();
             }
         });
-        
-        EnemyShooter enemy = new EnemyShooter(200, 0, Constants.enemyShooterImg);
-        enemies.add(enemy);
-        getChildren().add(enemy.getEnemyImageView());
 
         gameLoop = new AnimationTimer() {
-            private long lastEnemySpawnTime = 0;
+            private long lastEnemySpawnTime = 10;
             private Random random = new Random();
        
 
@@ -74,9 +70,16 @@ public class Game extends Pane {
                 if (now - lastEnemySpawnTime >= 2000000000) {                
                     double enemyX = random.nextDouble() * (screenWidth - 40);
                     double enemyY = 0;
-                    Enemy enemy = new Enemy(enemyX, enemyY, Constants.enemyImg);
-                    enemies.add(enemy);
-                    getChildren().add(enemy.getEnemyImageView());
+                    if (random.nextInt(10) + 1 > 5) {
+                    	Enemy enemy = new Enemy(enemyX, enemyY, Constants.enemyImg);
+                    	getChildren().add(enemy.getEnemyImageView());
+                    	enemies.add(enemy);
+                    } else {
+                    	EnemyShooter enemy = new EnemyShooter(enemyX, enemyY, Constants.enemyShooterImg);
+                    	getChildren().addAll(enemy.getEnemyImageView(), enemy.getLaserBeamView()); 
+                    	enemies.add(enemy);
+                    }
+                       
                     lastEnemySpawnTime = now;
                     
                 }
@@ -89,9 +92,11 @@ public class Game extends Pane {
                 Enemy enemyTmp = new Enemy(-100, -100, Constants.enemyImg);
                 for (Enemy enemy : enemies) {
                     enemy.move();
+                    enemy.shootLaserBeam();
+                    enemy.moveLaserBeam();
                     
                     if (player.enemyHit(enemy)) {
-                    	getChildren().remove(enemy.getEnemyImageView());
+                    	getChildren().removeAll(enemy.getEnemyImageView(), enemy.getLaserBeamView());
                     	enemyTmp = enemy;
                     	scoreText.setText("Score: " + player.getScore());
                     }
@@ -107,7 +112,8 @@ public class Game extends Pane {
                         }
                     }
                 }
-            	enemies.remove(enemyTmp);
+                
+                enemies.remove(enemyTmp);
             }
         };
 

@@ -37,6 +37,10 @@ public class Enemy {
     public double getY() {
     	return enemyY;
     }
+    
+    public double getEnemyWidth() {
+    	return enemyWidth;
+    }
 
     public ImageView getEnemyImageView() {
         return enemyImageView;
@@ -54,5 +58,18 @@ public class Enemy {
     	} else {
     		return false;
     	}
+    }
+    
+    public ImageView getLaserBeamView() {
+        return null;
+    }
+    
+    public void shootLaserBeam() {
+    	// empty
+    }
+    
+    public void moveLaserBeam() {
+    	// empty
+
     }
 }
