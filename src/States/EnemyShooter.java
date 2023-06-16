@@ -4,7 +4,6 @@ import Constants.Constants;
 
 public class EnemyShooter extends Enemy{
 	
-    //private ImageView laserBeamView;
     private double laserSpeed = -1;
     private boolean shooting = false;
     private LaserBeam laserBeam;
@@ -12,7 +11,6 @@ public class EnemyShooter extends Enemy{
 	public EnemyShooter(double x, double y, String image) {
 		super(x, y, image);
 		// TODO Auto-generated constructor stub
-		//createLaserBeamView();
         double laserBeamX = this.getX() + Constants.enemyWidth / 2;
         double laserBeamY = this.getY();
         laserBeam = new LaserBeam(laserBeamX, laserBeamY, laserSpeed);
@@ -45,7 +43,7 @@ public class EnemyShooter extends Enemy{
     
     public boolean playerHit(Player player) {
     	boolean hit = false;
-    	
+    	 
     	if (shooting) {
     		if (laserBeam.hit(player.getPlayerImageView().getX(), player.getPlayerImageView().getX()+Constants.playerWidth, player.getPlayerImageView().getY(), player.getPlayerImageView().getY()-Constants.playerHeight )) {
         		shooting = false;

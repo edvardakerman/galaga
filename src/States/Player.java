@@ -11,16 +11,14 @@ public class Player {
 
     private ImageView playerImageView;
     private LaserBeam laserBeam;
-    private double playerX;
-    private double playerY;
+    private double playerX = Constants.screenWidth - Constants.playerWidth / 2;
+    private double playerY = Constants.screenHeight - 50;
     private boolean shooting = false;
     private int score = 0;
     private int lives = 3;
     private int scoreMultiplier = 1;
 
     public Player() {
-        playerX = 180;
-        playerY = 350;
 
 		try {
 			Image playerImage = new Image(new FileInputStream(Constants.playerImg));

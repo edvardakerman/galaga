@@ -1,11 +1,7 @@
 package Constants;
 
 
-public interface Constants {
-	
-
-
-	
+public interface Constants {	
 	
 	// Player
 	String playerImg = "src/Public/player.png";

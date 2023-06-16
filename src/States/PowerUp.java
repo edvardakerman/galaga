@@ -12,8 +12,6 @@ public abstract class PowerUp {
     private double powerUpX;
     private double powerUpY;
 
-	
-	
 	PowerUp(double x, double y, String image){
 		this.powerUpX = x;
 		this.powerUpY = y;
@@ -36,7 +34,6 @@ public abstract class PowerUp {
     }
     
     public boolean playerHit(Player player) {
-        // Logic to check collision with an player
     	boolean hit = false;
 
     	if (powerUpImageView.getX()+20 >=  player.getPlayerImageView().getX() && powerUpImageView.getX() <= (player.getPlayerImageView().getX()+20))  {
