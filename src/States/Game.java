@@ -186,8 +186,8 @@ public class Game extends Pane {
         return enemyTmp;
     }
     
-    public void playerHit(Enemy enemy) {
-        if (enemy.playerHit(player)) {
+    public void playerHit(EnemyShooter enemyShooter) {
+        if (enemyShooter.playerHit(player)) {
         	player.setLives(player.getLives()-1);
         }
     }

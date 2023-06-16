@@ -16,7 +16,6 @@ public interface Constants {
     double enemyWidth = 40;
     double enemyHeight = 40;
     double enemySpeed = 0.5;
-
 	
 	// LaserBeam
     String laserImg = "src/Public/laser.png";
