@@ -2,6 +2,7 @@ package States;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
+import Constants.Constants;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -10,8 +11,7 @@ public abstract class PowerUp {
     private ImageView powerUpImageView;
     private double powerUpX;
     private double powerUpY;
-    private double powerUpWidth = 40;
-    private double powerUpHeight = 40;
+
 	
 	
 	PowerUp(double x, double y, String image){
@@ -23,8 +23,8 @@ public abstract class PowerUp {
 			powerUpImageView = new ImageView(powerUpImage);
 			powerUpImageView.setX(powerUpX);
 			powerUpImageView.setY(powerUpY);
-			powerUpImageView.setFitWidth(powerUpWidth);
-			powerUpImageView.setFitHeight(powerUpHeight);
+			powerUpImageView.setFitWidth(Constants.powerUpWidth);
+			powerUpImageView.setFitHeight(Constants.powerUpHeight);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -1,4 +1,5 @@
 package Main;
+import Constants.Constants;
 import States.Game;
 import States.Menu;
 import javafx.application.Application;
@@ -36,12 +37,12 @@ public class Main extends Application {
                        
         });
 
-        menuScene = new Scene(menu, 400, 400);
+        menuScene = new Scene(menu, Constants.screenWidth, Constants.screenHeight);
     }
 
     private void createGameScene() {   	
         game = new Game();
-        gameScene = new Scene(game, 400, 400);
+        gameScene = new Scene(game, Constants.screenWidth, Constants.screenHeight);
     }
 
     public static void main(String[] args) {

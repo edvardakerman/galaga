@@ -5,17 +5,14 @@ import java.io.FileNotFoundException;
 import Constants.Constants;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 
 public class Player {
 
     private ImageView playerImageView;
-    private ImageView laserBeamView;
+    private LaserBeam laserBeam;
     private double playerX;
     private double playerY;
-    private double playerWidth = 40;
-    private double playerHeight = 40;
-    private double playerSpeed = 10;
-    private double laserSpeed = 6;
     private boolean shooting = false;
     private int score = 0;
     private int lives = 3;
@@ -30,23 +27,9 @@ public class Player {
 	        playerImageView = new ImageView(playerImage);
 	        playerImageView.setX(playerX);
 	        playerImageView.setY(playerY);
-	        playerImageView.setFitWidth(playerWidth);
-	        playerImageView.setFitHeight(playerHeight);
-	        createLaserBeamView();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    }
-    
-    private void createLaserBeamView() {
-		try {
-			Image laserBeamImage = new Image(new FileInputStream(Constants.laserImg));
-	        laserBeamView = new ImageView(laserBeamImage);
-	        laserBeamView.setX(-100);
-	        laserBeamView.setY(-100);
-	        laserBeamView.setFitWidth(10);
-	        laserBeamView.setFitHeight(40);
+	        playerImageView.setFitWidth(Constants.playerWidth);
+	        playerImageView.setFitHeight(Constants.playerHeight);
+	        laserBeam = new LaserBeam(-100, -100, Constants.laserSpeed);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -58,34 +41,48 @@ public class Player {
         return playerImageView;
     }
 
-    public ImageView getLaserBeamView() {
-        return laserBeamView;
+    public LaserBeam getLaserBeam() {
+        return laserBeam;
+    }
+    
+    public void move(KeyCode keyCode) {
+        if (keyCode == KeyCode.UP) {
+            this.moveUp();
+        } else if (keyCode == KeyCode.DOWN) {
+            this.moveDown();
+        } else if (keyCode == KeyCode.LEFT) {
+            this.moveLeft();
+        } else if (keyCode == KeyCode.RIGHT) {
+            this.moveRight();
+        } else if (keyCode == KeyCode.SPACE) {
+            this.shootLaserBeam();
+        }
     }
     
     public void moveUp() {
         if (playerY > 10) {
-            playerY -= playerSpeed;
+            playerY -= Constants.playerSpeed;
             playerImageView.setY(playerY);
         }
     }
 
     public void moveDown() {
         if (playerY < 360) {
-            playerY += playerSpeed;
+            playerY += Constants.playerSpeed;
             playerImageView.setY(playerY);
         }
     }
 
     public void moveLeft() {
         if (playerX > 10) {
-            playerX -= playerSpeed;
+            playerX -= Constants.playerSpeed;
             playerImageView.setX(playerX);
         }
     }
 
     public void moveRight() {
         if (playerX < 360) {
-            playerX += playerSpeed;
+            playerX += Constants.playerSpeed;
             playerImageView.setX(playerX);
         }
     }
@@ -93,35 +90,35 @@ public class Player {
     public void shootLaserBeam() {
         if (!shooting) {
         	shooting = true;
-            double laserBeamX = playerX + playerWidth / 2 - laserBeamView.getFitWidth() / 2;
-            double laserBeamY = playerY - laserBeamView.getFitHeight();
-            laserBeamView.setX(laserBeamX);
-            laserBeamView.setY(laserBeamY);
+            double laserBeamX = playerX + Constants.playerWidth / 2 - Constants.laserWidth / 2;
+            double laserBeamY = playerY - Constants.laserHeight;
+            laserBeam.getLaserBeamView().setY(laserBeamY);
+            laserBeam.getLaserBeamView().setX(laserBeamX);
         }
     }
     
     public void moveLaserBeam() {    	
-    	if (laserBeamView.getY() >= -30) {
-    		laserBeamView.setY(laserBeamView.getY() - laserSpeed);
-    	} else {
-    		shooting = false;
+    	if (shooting) {
+        	if (laserBeam.getLaserBeamView().getY() >= -30) {
+        		laserBeam.moveLaserBeam();
+        	} else {
+        		shooting = false;
+        	}
     	}
         
     }
-
+    
+    
     public boolean enemyHit(Enemy enemy) {
     	boolean hit = false;
     	
     	if (shooting) {
-        	if (laserBeamView.getX() >=  enemy.getX() && laserBeamView.getX() <= (enemy.getX() + 40))  {
-            	if (laserBeamView.getY() >=  enemy.getY() && laserBeamView.getY() <= (enemy.getY() + 40))  {
-            		shooting = false;
-        	        laserBeamView.setX(-100);
-        	        laserBeamView.setY(-100);
-            		hit = true;
-            		setScore(1);
-            	}
-        	}
+    		if (laserBeam.hit(enemy.getEnemyImageView().getX(), enemy.getEnemyImageView().getX()+Constants.enemyWidth, enemy.getEnemyImageView().getY(), enemy.getEnemyImageView().getY()-Constants.enemyHeight )) {
+        		shooting = false;
+        		hit = true;
+        		setScore(1);
+    		}
+
     	}
     	
     	return hit;
