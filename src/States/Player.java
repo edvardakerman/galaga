@@ -72,7 +72,7 @@ public class Player {
     }
 
     public void moveLeft() {
-        if (playerX > 10) {
+        if (playerX > 0) {
             playerX -= Constants.playerSpeed;
             playerImageView.setX(playerX);
         }

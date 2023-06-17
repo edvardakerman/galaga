@@ -17,7 +17,7 @@ public class Game extends Pane {
     private List<Enemy> enemies;
     private List<EnemyShooter> enemieShooters;
     private List<LaserBeam> laserBeams;
-    private Text scoreText, livesText, gameOverText;
+    private Text scoreText, livesText, gameOverText, instrcutionsText;
     private boolean isGameOver = false;
     private AnimationTimer gameLoop;
 
@@ -32,13 +32,12 @@ public class Game extends Pane {
         enemieShooters = new ArrayList<>();
         laserBeams = new ArrayList<>();
         
-        gameOverText = createText(Constants.screenWidth / 2 -50, Constants.screenHeight / 2 -20, "Game Over");
+        gameOverText = createText(Constants.screenWidth / 2 -50, Constants.screenHeight / 2 -30, "Game Over", 20);
+        instrcutionsText = createText(Constants.screenWidth / 2 -70, Constants.screenHeight / 2, "Press ESC for menu", 15);
 
-        livesText = createText(10, 20, "Lives: " + player.getLives());
-        getChildren().add(livesText);
-
-        scoreText = createText(10, 50, "Score: " + player.getScore());
-        getChildren().add(scoreText);
+        livesText = createText(10, 20, "Lives: " + player.getLives(), 18);
+        scoreText = createText(10, 50, "Score: " + player.getScore(), 18);
+        getChildren().addAll(livesText, scoreText);
         
         ExtraLifePowerUp extraLifePowerUp = new ExtraLifePowerUp(-100, -100, Constants.heartImg);
         getChildren().add(extraLifePowerUp.getPowerUpImageView());
@@ -57,7 +56,7 @@ public class Game extends Pane {
                     stopGame();
                 }
             	if (isGameOver) {
-                    getChildren().add(gameOverText);
+                    getChildren().addAll(gameOverText, instrcutionsText);
             		this.stop();
             	}
                 spawnEnemy(now);
@@ -138,7 +137,7 @@ public class Game extends Pane {
                 for (EnemyShooter enemyShooter : enemieShooters) {
                 	enemyShooter.move();
                 	enemyShooter.shootLaserBeam();
-                	enemyShooter.moveLaserBeam();	
+                	enemyShooter.moveLaserBeam();
                                         
                     if (player.enemyHit(enemyShooter)) {
                     	getChildren().removeAll(enemyShooter.getEnemyImageView());
@@ -197,9 +196,9 @@ public class Game extends Pane {
         player.move(keyCode);
     }
 
-    private Text createText(double x, double y, String text) {
+    private Text createText(double x, double y, String text, int size) {
         Text t = new Text(x, y, text);
-        t.setFont(Font.font("Arial", 18));
+        t.setFont(Font.font("Arial", size));
         t.setFill(Color.WHITE);
         return t;
     }
@@ -208,7 +207,7 @@ public class Game extends Pane {
         gameLoop.start();
     }
 
-    private void stopGame() {
+    public void stopGame() {
         isGameOver = true;
         HighScore highScore = new HighScore();
         highScore.saveScore(player.getScore());

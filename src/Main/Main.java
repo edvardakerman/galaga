@@ -4,6 +4,7 @@ import States.Game;
 import States.Menu;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -18,7 +19,6 @@ public class Main extends Application {
         this.primaryStage = primaryStage;
 
         createMenuScene();
-        createGameScene();
 
         primaryStage.setScene(menuScene);
         primaryStage.setTitle("Game Menu");
@@ -30,10 +30,22 @@ public class Main extends Application {
         Menu menu = new Menu();
         menu.setOnStartGame(() -> {
 
+        	createGameScene();
             primaryStage.setScene(gameScene);
             primaryStage.setTitle("Game");
-            game.startGame();      
-            gameScene.setOnKeyPressed(event -> game.handleKeyPress(event.getCode()));
+            game.startGame();
+            
+            gameScene.setOnKeyPressed(event -> {
+            	  if (event.getCode() == KeyCode.ESCAPE) {
+            		  	game.stopGame();
+            	        primaryStage.setScene(menuScene);
+            	        primaryStage.setTitle("Game Menu");
+            	  } else {
+            		  game.handleKeyPress(event.getCode());
+            	  }
+            });
+            	   
+            	  
                        
         });
 
