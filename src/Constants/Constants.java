@@ -5,7 +5,7 @@ public interface Constants {
 	
 	// Player
 	String playerImg = "src/Public/player.png";
-    double playerWidth = 40;
+	double playerWidth = 40;
     double playerHeight = 40;
     double playerSpeed = 10;
     double laserSpeed = 6;
@@ -16,6 +16,11 @@ public interface Constants {
     double enemyWidth = 40;
     double enemyHeight = 40;
     double enemySpeed = 0.5;
+    
+    // Specials
+    String specialPlayerImg = "src/Public/specialPlayer.png";
+    String specialEnemyImg = "src/Public/specialEnemy.png";
+    String specialEnemyShooterImg = "src/Public/specialEnemyShooter.png";
 	
 	// LaserBeam
     String laserImg = "src/Public/laser.png";

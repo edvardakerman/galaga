@@ -1,4 +1,5 @@
 package States;
+
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
@@ -8,11 +9,12 @@ import javafx.scene.text.Text;
 
 public class Menu extends VBox {
 
-    private Button startButton, exitButton;
+    private Button startButton, exitButton, switchGameModeButton;
     private Text welcomeText, highScoreText;
     private Runnable onStartGame;
     HighScore highScore = new HighScore();
-
+    private String gameMode = "classicMode";
+    
     public Menu() {
         setStyle("-fx-background-color: #222222;");
         setSpacing(20);
@@ -33,15 +35,32 @@ public class Menu extends VBox {
             }
         });
         
+        switchGameModeButton = new Button("Switch Game Mode");
+        switchGameModeButton.setOnAction(event -> {
+        	if (gameMode == "classicMode") {
+        		gameMode = "specialMode";
+        	} else if (gameMode == "specialMode") {
+        		gameMode = "classicMode";
+        	}
+        });
+        
         exitButton = new Button("Exit Game");
         exitButton.setOnAction(event -> {
         	System.exit(0);
         });
 
-        getChildren().addAll(welcomeText, startButton, exitButton, highScoreText);
+        getChildren().addAll(welcomeText, startButton, switchGameModeButton, exitButton, highScoreText);
     }
 
     public void setOnStartGame(Runnable onStartGame) {
         this.onStartGame = onStartGame;
     }
+
+	public String getGameMode() {
+		return gameMode;
+	}
+	
+	public Text gethighScoreText() {
+		return highScoreText;
+	}
 }

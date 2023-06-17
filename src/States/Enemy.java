@@ -9,7 +9,7 @@ import javafx.scene.image.ImageView;
 
 public class Enemy {
 
-    private ImageView enemyImageView;
+	private ImageView enemyImageView;
     private double enemyX;
     private double enemyY;
 

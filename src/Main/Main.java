@@ -1,6 +1,7 @@
 package Main;
 import Constants.Constants;
 import States.Game;
+import States.HighScore;
 import States.Menu;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -13,6 +14,7 @@ public class Main extends Application {
     private Scene menuScene;
     private Scene gameScene;
     private Game game;
+    HighScore highScore = new HighScore();
 
     @Override
     public void start(Stage primaryStage) {
@@ -30,9 +32,10 @@ public class Main extends Application {
         Menu menu = new Menu();
         menu.setOnStartGame(() -> {
 
-        	createGameScene();
+        	createGameScene(menu.getGameMode());
             primaryStage.setScene(gameScene);
             primaryStage.setTitle("Game");
+            
             game.startGame();
             
             gameScene.setOnKeyPressed(event -> {
@@ -40,6 +43,7 @@ public class Main extends Application {
             		  	game.stopGame();
             	        primaryStage.setScene(menuScene);
             	        primaryStage.setTitle("Game Menu");
+            	        menu.gethighScoreText().setText("HighScore: " + highScore.getHighScore());
             	  } else {
             		  game.handleKeyPress(event.getCode());
             	  }
@@ -52,8 +56,8 @@ public class Main extends Application {
         menuScene = new Scene(menu, Constants.screenWidth, Constants.screenHeight);
     }
 
-    private void createGameScene() {   	
-        game = new Game();
+    private void createGameScene(String gameMode) {   	
+        game = new Game(gameMode);
         gameScene = new Scene(game, Constants.screenWidth, Constants.screenHeight);
     }
 

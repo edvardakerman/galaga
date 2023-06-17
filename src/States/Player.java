@@ -17,11 +17,11 @@ public class Player {
     private int score = 0;
     private int lives = 3;
     private int scoreMultiplier = 1;
-
-    public Player() {
+    
+    public Player(String playerImg) {
     	
 		try {
-			Image playerImage = new Image(new FileInputStream(Constants.playerImg));
+			Image playerImage = new Image(new FileInputStream(playerImg));
 	        playerImageView = new ImageView(playerImage);
 	        playerImageView.setX(playerX);
 	        playerImageView.setY(playerY);
