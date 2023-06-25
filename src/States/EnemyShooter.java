@@ -32,7 +32,7 @@ public class EnemyShooter extends Enemy{
     
     public void moveLaserBeam() {
     	if (shooting) {
-        	if (laserBeam.getLaserBeamView().getY() <= 420) {
+        	if (laserBeam.getLaserBeamView().getY() <= Constants.screenHeight + Constants.enemyHeight) {
         		laserBeam.moveLaserBeam();
         	} else {
         		shooting = false;

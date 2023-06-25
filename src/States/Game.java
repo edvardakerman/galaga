@@ -190,7 +190,7 @@ public class Game extends Pane {
 
     }
     
-    public Enemy collisions(Enemy enemy, Enemy enemyTmp) {        
+    private Enemy collisions(Enemy enemy, Enemy enemyTmp) {        
         if (enemy.collidesWith()) {
         	getChildren().remove(enemy.getEnemyImageView());
         	enemyTmp = enemy;
@@ -200,7 +200,7 @@ public class Game extends Pane {
         return enemyTmp;
     }
     
-    public void playerHit(EnemyShooter enemyShooter) {
+    private void playerHit(EnemyShooter enemyShooter) {
         if (enemyShooter.playerHit(player)) {
         	player.setLives(player.getLives()-1);
         }

@@ -57,35 +57,35 @@ public class Player {
         }
     }
     
-    public void moveUp() {
+    private void moveUp() {
         if (playerY > 10) {
             playerY -= Constants.playerSpeed;
             playerImageView.setY(playerY);
         }
     }
 
-    public void moveDown() {
+    private void moveDown() {
         if (playerY < 360) {
             playerY += Constants.playerSpeed;
             playerImageView.setY(playerY);
         }
     }
 
-    public void moveLeft() {
+    private void moveLeft() {
         if (playerX > 0) {
             playerX -= Constants.playerSpeed;
             playerImageView.setX(playerX);
         }
     }
 
-    public void moveRight() {
+    private void moveRight() {
         if (playerX < 360) {
             playerX += Constants.playerSpeed;
             playerImageView.setX(playerX);
         }
     }
 
-    public void shootLaserBeam() {
+    private void shootLaserBeam() {
         if (!shooting) {
         	shooting = true;
             double laserBeamX = playerX + Constants.playerWidth / 2 - Constants.laserWidth / 2;
