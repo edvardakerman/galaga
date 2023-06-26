@@ -29,12 +29,12 @@ public class Game extends Pane {
         setPrefSize(Constants.screenWidth, Constants.screenHeight);  
         
     	if (gameTyp == "classicMode") {
-    		setStyle("-fx-background-color: #111111;");
+    		setStyle(Constants.Blackbackground);
     		this.playerImg = Constants.playerImg;
     	    this.enemyImg = Constants.enemyImg;
     	    this.enemyShooterImg = Constants.enemyShooterImg;
     	} else if (gameTyp == "specialMode") {
-    		setStyle("-fx-background-color: #34495E;");
+    		setStyle(Constants.Bluebackground);
     		this.playerImg = Constants.specialPlayerImg;
     	    this.enemyImg = Constants.specialEnemyImg;
     	    this.enemyShooterImg = Constants.specialEnemyShooterImg;
@@ -213,7 +213,7 @@ public class Game extends Pane {
 
     private Text createText(double x, double y, String text, int size) {
         Text t = new Text(x, y, text);
-        t.setFont(Font.font("Arial", size));
+        t.setFont(Font.font(Constants.font, size));
         t.setFill(Color.WHITE);
         return t;
     }

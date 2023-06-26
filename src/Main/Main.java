@@ -23,7 +23,7 @@ public class Main extends Application {
         createMenuScene();
 
         primaryStage.setScene(menuScene);
-        primaryStage.setTitle("Game Menu");
+        primaryStage.setTitle("Galaga!");
         primaryStage.show();
     }
     
@@ -34,7 +34,6 @@ public class Main extends Application {
 
         	createGameScene(menu.getGameMode());
             primaryStage.setScene(gameScene);
-            primaryStage.setTitle("Game");
             
             game.startGame();
             
@@ -42,7 +41,6 @@ public class Main extends Application {
             	  if (event.getCode() == KeyCode.ESCAPE) {
             		  	game.stopGame();
             	        primaryStage.setScene(menuScene);
-            	        primaryStage.setTitle("Game Menu");
             	        menu.gethighScoreText().setText("HighScore: " + highScore.getHighScore());
             	  } else {
             		  game.handleKeyPress(event.getCode());

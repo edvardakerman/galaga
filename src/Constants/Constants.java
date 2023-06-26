@@ -37,4 +37,12 @@ public interface Constants {
 	// Screen
     final double screenWidth = 400;
     final double screenHeight = 400;
+    
+    // Other
+    String galagaLogoImg = "src/Public/galagaLogo.png";
+    String font = "Impact";
+    
+    // Colors
+    String Bluebackground = "-fx-background-color: #34495E;";
+    String Blackbackground = "-fx-background-color: #111111;";
 }
