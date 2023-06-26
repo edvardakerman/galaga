@@ -41,7 +41,7 @@ public class EnemyShooter extends Enemy{
 
     }
     
-    public boolean playerHit(Player player) {
+    public boolean playerHitWithEnemyLaser(Player player) {
     	boolean hit = false;
     	 
     	if (shooting) {

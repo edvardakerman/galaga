@@ -45,4 +45,5 @@ public interface Constants {
     // Colors
     String Bluebackground = "-fx-background-color: #34495E;";
     String Blackbackground = "-fx-background-color: #111111;";
+    
 }

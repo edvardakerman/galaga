@@ -138,6 +138,7 @@ public class Game extends Pane {
                 for (Enemy enemy : enemies) {
                     enemy.move();
                     
+                    
                     if (player.enemyHit(enemy)) {
                     	getChildren().remove(enemy.getEnemyImageView());
                     	enemyTmp = enemy;
@@ -191,7 +192,7 @@ public class Game extends Pane {
     }
     
     private Enemy collisions(Enemy enemy, Enemy enemyTmp) {        
-        if (enemy.collidesWith()) {
+        if (enemy.collidesWith() || enemy.playerEnemyCollision(player)) {
         	getChildren().remove(enemy.getEnemyImageView());
         	enemyTmp = enemy;
         	player.setLives(player.getLives()-1);
@@ -201,11 +202,10 @@ public class Game extends Pane {
     }
     
     private void playerHit(EnemyShooter enemyShooter) {
-        if (enemyShooter.playerHit(player)) {
+        if (enemyShooter.playerHitWithEnemyLaser(player)) {
         	player.setLives(player.getLives()-1);
         }
-    }
-   
+    } 
     
     public void handleKeyPress(KeyCode keyCode) {        
         player.move(keyCode);

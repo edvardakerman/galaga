@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import Constants.Constants;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.shape.Rectangle;
 
 public class Enemy {
 
@@ -53,6 +54,22 @@ public class Enemy {
     	} else {
     		return false;
     	}
+    }
+    
+    public boolean playerEnemyCollision(Player player) {
+    	boolean hit = false;
+        	
+        	Rectangle playerRect = new Rectangle(player.getPlayerImageView().getX(), player.getPlayerImageView().getY(), Constants.playerWidth,
+        			Constants.playerHeight);
+        	
+        	Rectangle enemyRect = new Rectangle(this.getEnemyImageView().getX(), this.getEnemyImageView().getY(), Constants.enemyWidth,
+        			Constants.enemyHeight);
+
+        			if (playerRect.getBoundsInParent().intersects(enemyRect.getBoundsInParent())) { // objecten har kolliderat!
+        				hit = true;
+        			}
+    	
+    	return hit;
     }
     
 }
