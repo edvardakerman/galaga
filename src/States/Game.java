@@ -103,8 +103,8 @@ public class Game extends Pane {
             
             private void spawnPowerUps(long now) {
                 if (now - lastExtraLifePoweUpSpawnTime >= 30000000000L && player.getLives() < 3) {                
-                    double powerUpX = random.nextDouble() * (Constants.screenWidth - 40);
-                    double powerUpY = random.nextDouble((Constants.screenHeight-40)-(Constants.screenHeight/2)) + Constants.screenHeight/2;
+                    double powerUpX = random.nextDouble() * (Constants.screenWidth - Constants.powerUpWidth);
+                    double powerUpY = random.nextDouble((Constants.screenHeight-Constants.powerUpHeight)-(Constants.screenHeight/2)) + Constants.screenHeight/2;
                     extraLifePowerUp.getPowerUpImageView().setX(powerUpX);
                     extraLifePowerUp.getPowerUpImageView().setY(powerUpY);
                     lastExtraLifePoweUpSpawnTime = now;

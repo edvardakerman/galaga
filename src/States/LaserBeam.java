@@ -53,7 +53,7 @@ public class LaserBeam {
 		Rectangle laserRect = new Rectangle(this.getLaserBeamView().getX(), this.laserBeamView.getY(),
 				Constants.laserWidth, Constants.laserHeight);
 
-		if (shipRect.getBoundsInParent().intersects(laserRect.getBoundsInParent())) { // objecten har kolliderat!
+		if (shipRect.getBoundsInParent().intersects(laserRect.getBoundsInParent())) {
 			hit = true;
 	        laserBeamView.setX(-100);
 	        laserBeamView.setY(-100);

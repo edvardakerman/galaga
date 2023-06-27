@@ -65,7 +65,7 @@ public class Enemy {
 		Rectangle enemyRect = new Rectangle(this.getEnemyImageView().getX(), this.getEnemyImageView().getY(),
 				Constants.enemyWidth, Constants.enemyHeight);
 
-		if (playerRect.getBoundsInParent().intersects(enemyRect.getBoundsInParent())) { // objecten har kolliderat!
+		if (playerRect.getBoundsInParent().intersects(enemyRect.getBoundsInParent())) {
 			hit = true;
 		}
 

@@ -34,8 +34,6 @@ public class EnemyShooter extends Enemy{
     	if (shooting) {
         	if (laserBeam.getLaserBeamView().getY() <= Constants.screenHeight + Constants.enemyHeight) {
         		laserBeam.moveLaserBeam();
-        	} else {
-        		shooting = false;
         	}
     	}
 
@@ -46,7 +44,6 @@ public class EnemyShooter extends Enemy{
     	 
     	if (shooting) {
         	if (laserBeam.laserShipCollision(player.getPlayerImageView().getX(), player.getPlayerImageView().getY(), Constants.playerWidth, Constants.playerHeight)) {
-        		shooting = false;
         		hit = true;
     		}
 

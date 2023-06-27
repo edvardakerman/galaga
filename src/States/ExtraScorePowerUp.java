@@ -9,7 +9,7 @@ public class ExtraScorePowerUp extends PowerUp{
 	@Override
 	public void use(Player player) {
 		// TODO Auto-generated method stub
-    	if (this.playerHit(player)) {   		
+    	if (this.powerUpPlayerCollision(player)) {   		
     		player.setScoreMultiplier(player.getScoreMultiplie()+1);   		
     	}
 	}
