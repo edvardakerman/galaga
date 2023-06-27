@@ -45,7 +45,7 @@ public class EnemyShooter extends Enemy{
     	boolean hit = false;
     	 
     	if (shooting) {
-    		if (laserBeam.hit(player.getPlayerImageView().getX(), player.getPlayerImageView().getX()+Constants.playerWidth, player.getPlayerImageView().getY(), player.getPlayerImageView().getY()-Constants.playerHeight )) {
+        	if (laserBeam.laserShipCollision(player.getPlayerImageView().getX(), player.getPlayerImageView().getY(), Constants.playerWidth, Constants.playerHeight)) {
         		shooting = false;
         		hit = true;
     		}

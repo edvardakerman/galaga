@@ -111,7 +111,7 @@ public class Player {
     	boolean hit = false;
     	
     	if (shooting) {
-    		if (laserBeam.hit(enemy.getEnemyImageView().getX(), enemy.getEnemyImageView().getX()+Constants.enemyWidth, enemy.getEnemyImageView().getY(), enemy.getEnemyImageView().getY()-Constants.enemyHeight )) {
+    		if (laserBeam.laserShipCollision(enemy.getEnemyImageView().getX(), enemy.getEnemyImageView().getY(), Constants.enemyWidth, Constants.enemyHeight )) {
         		shooting = false;
         		hit = true;
         		setScore(1);

@@ -67,12 +67,10 @@ public class Game extends Pane {
 
             @Override
             public void handle(long now) {
-                if (player.getLives() == 0) {
-                    stopGame();
-                }
+            	checkGameStatus();
             	if (isGameOver) {
-                    getChildren().addAll(gameOverText, instrcutionsText);
             		this.stop();
+                    getChildren().addAll(gameOverText, instrcutionsText);
             	}
                 spawnEnemy(now);
                 spawnPowerUps(now);
@@ -155,8 +153,8 @@ public class Game extends Pane {
                 	enemyShooter.shootLaserBeam();
                 	enemyShooter.moveLaserBeam();
                                         
-                    if (player.enemyHit(enemyShooter)) {
-                    	getChildren().removeAll(enemyShooter.getEnemyImageView());
+                    if (player.enemyHit(enemyShooter) || enemyShooter.playerEnemyCollision(player)) {
+                    	getChildren().remove(enemyShooter.getEnemyImageView());
                     	laserBeams.add(enemyShooter.getLaserBeam());
                     	enemyTmp = enemyShooter;
                     	
@@ -173,7 +171,7 @@ public class Game extends Pane {
                 for (LaserBeam laserBeam : laserBeams) {
                 	laserBeam.moveLaserBeam();
                 	
-                	if (laserBeam.hit(player.getPlayerImageView().getX(), player.getPlayerImageView().getX()+Constants.playerWidth, player.getPlayerImageView().getY(), player.getPlayerImageView().getY()-Constants.playerHeight)) {
+                	if (laserBeam.laserShipCollision(player.getPlayerImageView().getX(), player.getPlayerImageView().getY(), Constants.playerWidth, Constants.playerHeight)) {
                 		player.setLives(player.getLives()-1);
                 		laserBeamTmp = laserBeam;
                 		getChildren().remove(laserBeam.getLaserBeamView());
@@ -192,7 +190,7 @@ public class Game extends Pane {
     }
     
     private Enemy collisions(Enemy enemy, Enemy enemyTmp) {        
-        if (enemy.collidesWith() || enemy.playerEnemyCollision(player)) {
+        if (enemy.slipsByPlayer() || enemy.playerEnemyCollision(player)) {
         	getChildren().remove(enemy.getEnemyImageView());
         	enemyTmp = enemy;
         	player.setLives(player.getLives()-1);
@@ -220,6 +218,13 @@ public class Game extends Pane {
     
     public void startGame() {
         gameLoop.start();
+    }
+    
+    
+    private void checkGameStatus() {
+        if (player.getLives() == 0) {
+            stopGame();
+        }
     }
 
     public void stopGame() {
