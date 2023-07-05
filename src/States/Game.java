@@ -8,15 +8,14 @@ import javafx.scene.text.Text;
 import Constants.Constants;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class Game extends Pane {
 
     private Player player;
-    private List<Enemy> enemies;
-    private List<EnemyShooter> enemieShooters;
-    private List<LaserBeam> laserBeams;
+    private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+    private ArrayList<EnemyShooter> enemieShooters = new ArrayList<EnemyShooter>();
+    private ArrayList<LaserBeam> laserBeams = new ArrayList<LaserBeam>();
     private Text scoreText, livesText, gameOverText, instrcutionsText;
     private boolean isGameOver = false;
     private AnimationTimer gameLoop;
@@ -24,16 +23,16 @@ public class Game extends Pane {
     private String enemyImg = Constants.enemyImg;
     private String enemyShooterImg = Constants.enemyShooterImg;
 
-    public Game(String gameTyp) {
+    public Game(String gameMode) {
         
         setPrefSize(Constants.screenWidth, Constants.screenHeight);  
         
-    	if (gameTyp == "classicMode") {
+    	if (gameMode == "classicMode") {
     		setStyle(Constants.Blackbackground);
     		this.playerImg = Constants.playerImg;
     	    this.enemyImg = Constants.enemyImg;
     	    this.enemyShooterImg = Constants.enemyShooterImg;
-    	} else if (gameTyp == "specialMode") {
+    	} else if (gameMode == "specialMode") {
     		setStyle(Constants.Bluebackground);
     		this.playerImg = Constants.specialPlayerImg;
     	    this.enemyImg = Constants.specialEnemyImg;
@@ -42,10 +41,6 @@ public class Game extends Pane {
         
         player = new Player(playerImg);
         getChildren().addAll(player.getPlayerImageView(), player.getLaserBeam().getLaserBeamView());
-
-        enemies = new ArrayList<>();
-        enemieShooters = new ArrayList<>();
-        laserBeams = new ArrayList<>();
         
         gameOverText = createText(Constants.screenWidth / 2 -50, Constants.screenHeight / 2 -30, "Game Over", 20);
         instrcutionsText = createText(Constants.screenWidth / 2 -70, Constants.screenHeight / 2, "Press ESC for menu", 15);
