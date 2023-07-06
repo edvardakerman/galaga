@@ -15,12 +15,13 @@ import javafx.scene.text.Text;
 
 public class Menu extends VBox {
 
-    private Button startButton, exitButton, switchGameModeButton;
+    private Button startBtn, exitBtn, switchGameModeBtn;
     private Text highScoreText;
     private ImageView galagaImageView;
     private Runnable onStartGame;
     HighScore highScore = new HighScore();
-    private String gameMode = "classicMode";
+    //private String gameMode = "classicMode";
+    GameMode gameMode = new GameMode("Classic");
     
     public Menu() {
         setStyle(Constants.Blackbackground);
@@ -40,40 +41,34 @@ public class Menu extends VBox {
         highScoreText.setFont(Font.font(Constants.font, 15));
         highScoreText.setFill(Color.WHITE);
 
-        startButton = createButton("Start Game", 20);
-        startButton.setOnAction(event -> {
+        startBtn = createButton("Start Game", 20);
+        startBtn.setOnAction(event -> {
             if (onStartGame != null) {
                 onStartGame.run();
             }
         });
         
-        switchGameModeButton = createButton("Classic", 15);
-        switchGameModeButton.setOnAction(event -> {
-        	switchGameMode();
+        switchGameModeBtn = createButton("Classic", 15);
+        switchGameModeBtn.setOnAction(event -> {
+        	switchGameModeBtnAction();
         });
         
-        exitButton = createButton("Exit", 15);
-        exitButton.setOnAction(event -> {
+        exitBtn = createButton("Exit", 15);
+        exitBtn.setOnAction(event -> {
         	System.exit(0);
         });
 
-        getChildren().addAll(galagaImageView, startButton, switchGameModeButton, exitButton, highScoreText);
+        getChildren().addAll(galagaImageView, startBtn, switchGameModeBtn, exitBtn, highScoreText);
     }
 
     public void setOnStartGame(Runnable onStartGame) {
         this.onStartGame = onStartGame;
     }
     
-    private void switchGameMode() {
-    	if (gameMode == "classicMode") {
-    		gameMode = "specialMode";
-    		setStyle(Constants.Bluebackground);
-    		switchGameModeButton.setText("Special");
-    	} else if (gameMode == "specialMode") {
-    		gameMode = "classicMode";
-    		switchGameModeButton.setText("Classic");
-    		setStyle(Constants.Blackbackground);
-    	}
+    private void switchGameModeBtnAction() {
+    	gameMode.switchGameMode();  	
+		setStyle(gameMode.getBackgroundColor());
+		switchGameModeBtn.setText(gameMode.getCurrentGameMode());
     }
     
     private Button createButton(String text, int size) {
@@ -83,7 +78,7 @@ public class Menu extends VBox {
         return btn;
     }
 
-	public String getGameMode() {
+	public GameMode getGameMode() {
 		return gameMode;
 	}
 	

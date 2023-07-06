@@ -1,6 +1,7 @@
 package Main;
 import Constants.Constants;
 import States.Game;
+import States.GameMode;
 import States.HighScore;
 import States.Menu;
 import javafx.application.Application;
@@ -54,7 +55,7 @@ public class Main extends Application {
         menuScene = new Scene(menu, Constants.screenWidth, Constants.screenHeight);
     }
 
-    private void createGameScene(String gameMode) {   	
+    private void createGameScene(GameMode gameMode) {   	
         game = new Game(gameMode);
         gameScene = new Scene(game, Constants.screenWidth, Constants.screenHeight);
     }

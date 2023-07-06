@@ -13,8 +13,7 @@ public class LaserBeam {
 	private ImageView laserBeamView;
 	private double laserX;
 	private double laserY;
-	private double laserSpeed = 6;
-	// private boolean shooting = false;
+	private double laserSpeed;
 
 	public LaserBeam(double x, double y, double laserSpeed) {
 		this.laserX = x - Constants.laserWidth / 2;

@@ -19,27 +19,13 @@ public class Game extends Pane {
     private Text scoreText, livesText, gameOverText, instrcutionsText;
     private boolean isGameOver = false;
     private AnimationTimer gameLoop;
-    private String playerImg = Constants.playerImg;
-    private String enemyImg = Constants.enemyImg;
-    private String enemyShooterImg = Constants.enemyShooterImg;
 
-    public Game(String gameMode) {
+    public Game(GameMode gameMode) {
         
-        setPrefSize(Constants.screenWidth, Constants.screenHeight);  
+        setPrefSize(Constants.screenWidth, Constants.screenHeight);
+        setStyle(gameMode.getBackgroundColor());
         
-    	if (gameMode == "classicMode") {
-    		setStyle(Constants.Blackbackground);
-    		this.playerImg = Constants.playerImg;
-    	    this.enemyImg = Constants.enemyImg;
-    	    this.enemyShooterImg = Constants.enemyShooterImg;
-    	} else if (gameMode == "specialMode") {
-    		setStyle(Constants.Bluebackground);
-    		this.playerImg = Constants.specialPlayerImg;
-    	    this.enemyImg = Constants.specialEnemyImg;
-    	    this.enemyShooterImg = Constants.specialEnemyShooterImg;
-    	}
-        
-        player = new Player(playerImg);
+        player = new Player(gameMode.getPlayerImg());
         getChildren().addAll(player.getPlayerImageView(), player.getLaserBeam().getLaserBeamView());
         
         gameOverText = createText(Constants.screenWidth / 2 -50, Constants.screenHeight / 2 -30, "Game Over", 20);
@@ -80,12 +66,12 @@ public class Game extends Pane {
                 if (now - lastEnemySpawnTime >= 3000000000L - player.getScore() * 10000000) {                
                     double enemyX = random.nextDouble() * (Constants.screenWidth - Constants.enemyWidth);
                     double enemyY = 0;
-                    if (random.nextInt(10) + 1 > 5) {
-                    	Enemy enemy = new Enemy(enemyX, enemyY, enemyImg);
+                    if (random.nextInt(10) + 1 > 4) {
+                    	Enemy enemy = new Enemy(enemyX, enemyY, gameMode.getEnemyImg());
                     	getChildren().add(enemy.getEnemyImageView());
                     	enemies.add(enemy);
                     } else {
-                    	EnemyShooter enemy = new EnemyShooter(enemyX, enemyY, enemyShooterImg);
+                    	EnemyShooter enemy = new EnemyShooter(enemyX, enemyY, gameMode.getEnemyShooterImg());
                     	getChildren().addAll(enemy.getEnemyImageView(), enemy.getLaserBeam().getLaserBeamView()); 
                     	enemieShooters.add(enemy);
                     }
