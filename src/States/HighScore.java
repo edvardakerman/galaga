@@ -5,6 +5,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * HighScore handles the score and store/read it to/from a local file
+ */
+
 public class HighScore {
 
 	public void saveScore(int score) {

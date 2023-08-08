@@ -9,6 +9,10 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
+/**
+ * Main is the entry point of the application and creates the game and menu scene.
+ */
+
 public class Main extends Application {
 
     private Stage primaryStage;
@@ -47,9 +51,7 @@ public class Main extends Application {
             		  game.handleKeyPress(event.getCode());
             	  }
             });
-            	   
-            	  
-                       
+            	                      
         });
 
         menuScene = new Scene(menu, Constants.screenWidth, Constants.screenHeight);

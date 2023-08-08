@@ -1,5 +1,9 @@
 package Constants;
 
+/**
+ * Constants stores constants like images and other values used trough out the application
+ */
+
 
 public interface Constants {	
 	

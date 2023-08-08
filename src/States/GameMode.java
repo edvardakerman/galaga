@@ -2,6 +2,12 @@ package States;
 
 import Constants.Constants;
 
+/**
+ * GameMode handles the game mode state and updates its variables depending on the current state.
+ * The class acts as a translator between the Constants and the application.
+ */
+
+
 public class GameMode {
 	private String backgroundColor = Constants.Blackbackground;
     private String playerImg = Constants.playerImg;

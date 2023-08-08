@@ -8,6 +8,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 
+/**
+ * LaserBeam handles the laser including ImageView, positioning and collisions.
+ */
+
 public class LaserBeam {
 
 	private ImageView laserBeamView;

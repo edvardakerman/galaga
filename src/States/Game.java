@@ -6,9 +6,17 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import Constants.Constants;
-
 import java.util.ArrayList;
 import java.util.Random;
+
+
+/**
+ * Game handles the game including the player and enemies.
+ * 
+ * The class uses an animationTimer to handle graphics and time sensitive changes. 
+ * This includes spawning, removing and moving objects.
+ */
+
 
 public class Game extends Pane {
 
@@ -125,8 +133,7 @@ public class Game extends Pane {
                     
                     enemyTmp = collisions(enemy, enemyTmp);
                 }               
-                enemies.remove(enemyTmp);
-                
+                enemies.remove(enemyTmp);               
                 
                 // Enemy Shooters
                 for (EnemyShooter enemyShooter : enemieShooters) {
@@ -142,13 +149,12 @@ public class Game extends Pane {
                     }
                     
                     playerHit(enemyShooter);
-                    enemyTmp = collisions(enemyShooter, enemyTmp);
-                 
+                    enemyTmp = collisions(enemyShooter, enemyTmp);                 
                                       
                 }
                 enemieShooters.remove(enemyTmp);
                 
-                // Laserbeams
+                // Game takes over laserbeams without ownership, (enemyships shot down)
                 for (LaserBeam laserBeam : laserBeams) {
                 	laserBeam.moveLaserBeam();
                 	

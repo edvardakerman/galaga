@@ -2,6 +2,10 @@ package States;
 
 import Constants.Constants;
 
+/**
+ * EnemyShooter is a subclass to the Enemy class. This class adds the extra functionality shooting to the EnemyShooter
+ */
+
 public class EnemyShooter extends Enemy{
 	
     private double laserSpeed = -1;

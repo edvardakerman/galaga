@@ -2,11 +2,14 @@ package States;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-
 import Constants.Constants;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
+
+/**
+ * PowerUp is a abstract class and provides the basic functionality of ImageView, positioning and collisions.
+ */
 
 public abstract class PowerUp {
 

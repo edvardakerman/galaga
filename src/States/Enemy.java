@@ -8,6 +8,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 
+/**
+ * Enemy handles the enemy behavior including its ImageView and variables. This is a superclass to the EnemyShooter class.
+ */
+
 public class Enemy {
 
 	private ImageView enemyImageView;

@@ -2,7 +2,6 @@ package States;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-
 import Constants.Constants;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -12,6 +11,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+
+/**
+ * Menu handles the menu which is viewed from Main.
+ * This includes the options to start the game and the switch game mode, and also displaying the highscore and logo.
+ */
 
 public class Menu extends VBox {
 
