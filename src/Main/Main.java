@@ -3,7 +3,6 @@ package Main;
 import Constants.Constants;
 import States.Game;
 import States.GameMode;
-import States.HighScore;
 import States.Menu;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -21,7 +20,7 @@ public class Main extends Application {
 	private Scene menuScene;
 	private Scene gameScene;
 	private Game game;
-	HighScore highScore = new HighScore();
+	// HighScore highScore = new HighScore();
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -47,7 +46,7 @@ public class Main extends Application {
 				if (event.getCode() == KeyCode.ESCAPE) {
 					game.stopGame();
 					primaryStage.setScene(menuScene);
-					menu.gethighScoreText().setText("HighScore: " + highScore.getHighScore());
+					menu.updateHighScore();
 				} else {
 					game.handleKeyPress(event.getCode());
 				}

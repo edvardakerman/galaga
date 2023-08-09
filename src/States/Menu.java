@@ -86,7 +86,8 @@ public class Menu extends VBox {
 		return gameMode;
 	}
 
-	public Text gethighScoreText() {
-		return highScoreText;
+	public void updateHighScore() {
+		highScoreText.setText("HighScore: " + highScore.getHighScore());
 	}
+
 }
