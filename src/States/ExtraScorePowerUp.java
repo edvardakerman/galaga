@@ -15,7 +15,7 @@ public class ExtraScorePowerUp extends PowerUp {
 	public void use(Player player) {
 		// TODO Auto-generated method stub
 		if (this.powerUpPlayerCollision(player)) {
-			player.setScoreMultiplier(player.getScoreMultiplie() + 1);
+			player.setScoreBonus(player.getScoreBonus() + 1);
 		}
 	}
 }

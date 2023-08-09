@@ -22,7 +22,7 @@ public class Player {
 	private boolean shooting = false;
 	private int score = 0;
 	private int lives = 3;
-	private int scoreMultiplier = 1;
+	private int scoreBonus = 1;
 
 	public Player(String playerImg) {
 
@@ -132,15 +132,15 @@ public class Player {
 	}
 
 	public void setScore(int Score) {
-		this.score += Score * scoreMultiplier;
+		this.score += Score * scoreBonus;
 	}
 
-	public void setScoreMultiplier(int newValue) {
-		this.scoreMultiplier = newValue;
+	public void setScoreBonus(int newValue) {
+		this.scoreBonus = newValue;
 	}
 
-	public int getScoreMultiplie() {
-		return scoreMultiplier;
+	public int getScoreBonus() {
+		return scoreBonus;
 	}
 
 	public int getLives() {
