@@ -30,15 +30,15 @@ public class HighScore {
 		int highScore = 0;
 
 		try {
-			File myObj = new File("src/HighScore.txt");
-			Scanner myReader = new Scanner(myObj);
+			File highScoreTxtFile = new File("src/HighScore.txt");
+			Scanner myReader = new Scanner(highScoreTxtFile);
 			while (myReader.hasNextLine()) {
 				String data = myReader.nextLine();
 				highScore = Integer.parseInt(data);
 			}
 			myReader.close();
 		} catch (FileNotFoundException e) {
-			System.out.println("An error occurred.");
+			System.out.println("File not found.");
 			e.printStackTrace();
 		}
 
