@@ -9,7 +9,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 
 /**
- * Player handles the players behavior including its ImageView, positioning and other variables.
+ * Player handles the players behavior including its ImageView, positioning and
+ * other variables.
  */
 
 public class Player {

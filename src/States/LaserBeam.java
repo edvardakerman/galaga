@@ -58,8 +58,8 @@ public class LaserBeam {
 
 		if (shipRect.getBoundsInParent().intersects(laserRect.getBoundsInParent())) {
 			hit = true;
-	        laserBeamView.setX(-100);
-	        laserBeamView.setY(-100);
+			laserBeamView.setX(-100);
+			laserBeamView.setY(-100);
 		}
 
 		return hit;

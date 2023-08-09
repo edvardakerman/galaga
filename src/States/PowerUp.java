@@ -8,7 +8,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 
 /**
- * PowerUp is a abstract class and provides the basic functionality of ImageView, positioning and collisions.
+ * PowerUp is a abstract class and provides the basic functionality of
+ * ImageView, positioning and collisions.
  */
 
 public abstract class PowerUp {

@@ -13,25 +13,25 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 /**
- * Menu handles the menu which is viewed from Main.
- * This includes the options to start the game and the switch game mode, and also displaying the highscore and logo.
+ * Menu handles the menu which is viewed from Main. This includes the options to
+ * start the game and the switch game mode, and also displaying the highscore
+ * and logo.
  */
 
 public class Menu extends VBox {
 
-    private Button startBtn, exitBtn, switchGameModeBtn;
-    private Text highScoreText;
-    private ImageView galagaImageView;
-    private Runnable onStartGame;
-    HighScore highScore = new HighScore();
-    //private String gameMode = "classicMode";
-    GameMode gameMode = new GameMode("Classic");
-    
-    public Menu() {
-        setStyle(Constants.Blackbackground);
-        setSpacing(20);
-        setAlignment(Pos.CENTER);
-        
+	private Button startBtn, exitBtn, switchGameModeBtn;
+	private Text highScoreText;
+	private ImageView galagaImageView;
+	private Runnable onStartGame;
+	HighScore highScore = new HighScore();
+	GameMode gameMode = new GameMode("Classic");
+
+	public Menu() {
+		setStyle(Constants.Blackbackground);
+		setSpacing(20);
+		setAlignment(Pos.CENTER);
+
 		Image galagaLogoImage;
 		try {
 			galagaLogoImage = new Image(new FileInputStream(Constants.galagaLogoImg));
@@ -40,52 +40,52 @@ public class Menu extends VBox {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        
-        highScoreText = new Text("HighScore: " + highScore.getHighScore());
-        highScoreText.setFont(Font.font(Constants.font, 15));
-        highScoreText.setFill(Color.WHITE);
 
-        startBtn = createButton("Start Game", 20);
-        startBtn.setOnAction(event -> {
-            if (onStartGame != null) {
-                onStartGame.run();
-            }
-        });
-        
-        switchGameModeBtn = createButton("Classic", 15);
-        switchGameModeBtn.setOnAction(event -> {
-        	switchGameModeBtnAction();
-        });
-        
-        exitBtn = createButton("Exit", 15);
-        exitBtn.setOnAction(event -> {
-        	System.exit(0);
-        });
+		highScoreText = new Text("HighScore: " + highScore.getHighScore());
+		highScoreText.setFont(Font.font(Constants.font, 15));
+		highScoreText.setFill(Color.WHITE);
 
-        getChildren().addAll(galagaImageView, startBtn, switchGameModeBtn, exitBtn, highScoreText);
-    }
+		startBtn = createButton("Start Game", 20);
+		startBtn.setOnAction(event -> {
+			if (onStartGame != null) {
+				onStartGame.run();
+			}
+		});
 
-    public void setOnStartGame(Runnable onStartGame) {
-        this.onStartGame = onStartGame;
-    }
-    
-    private void switchGameModeBtnAction() {
-    	gameMode.switchGameMode();  	
+		switchGameModeBtn = createButton("Classic", 15);
+		switchGameModeBtn.setOnAction(event -> {
+			switchGameModeBtnAction();
+		});
+
+		exitBtn = createButton("Exit", 15);
+		exitBtn.setOnAction(event -> {
+			System.exit(0);
+		});
+
+		getChildren().addAll(galagaImageView, startBtn, switchGameModeBtn, exitBtn, highScoreText);
+	}
+
+	public void setOnStartGame(Runnable onStartGame) {
+		this.onStartGame = onStartGame;
+	}
+
+	private void switchGameModeBtnAction() {
+		gameMode.switchGameMode();
 		setStyle(gameMode.getBackgroundColor());
 		switchGameModeBtn.setText(gameMode.getCurrentGameMode());
-    }
-    
-    private Button createButton(String text, int size) {
-        Button btn = new Button(text);
-        btn.setFont(Font.font(Constants.font, size));
-        btn.setStyle("-fx-focus-color: transparent;");
-        return btn;
-    }
+	}
+
+	private Button createButton(String text, int size) {
+		Button btn = new Button(text);
+		btn.setFont(Font.font(Constants.font, size));
+		btn.setStyle("-fx-focus-color: transparent;");
+		return btn;
+	}
 
 	public GameMode getGameMode() {
 		return gameMode;
 	}
-	
+
 	public Text gethighScoreText() {
 		return highScoreText;
 	}

@@ -1,11 +1,12 @@
 package States;
 
 /**
- * ExtraScorePowerUp is a subclass to the PowerUp class, this class overrides the method use() which in this increases all new points by one.
+ * ExtraScorePowerUp is a subclass to the PowerUp class, this class overrides
+ * the method use() which in this increases all new points by one.
  */
 
-public class ExtraScorePowerUp extends PowerUp{
-		
+public class ExtraScorePowerUp extends PowerUp {
+
 	public ExtraScorePowerUp(double x, double y, String image) {
 		super(x, y, image);
 	}
@@ -13,8 +14,8 @@ public class ExtraScorePowerUp extends PowerUp{
 	@Override
 	public void use(Player player) {
 		// TODO Auto-generated method stub
-    	if (this.powerUpPlayerCollision(player)) {   		
-    		player.setScoreMultiplier(player.getScoreMultiplie()+1);   		
-    	}
+		if (this.powerUpPlayerCollision(player)) {
+			player.setScoreMultiplier(player.getScoreMultiplie() + 1);
+		}
 	}
 }

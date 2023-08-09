@@ -1,4 +1,5 @@
 package States;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -17,7 +18,6 @@ public class HighScore {
 				FileWriter writer = new FileWriter("src/HighScore.txt");
 				writer.write("");
 				writer.write(Integer.toString(score));
-				System.out.println(Integer.toString(score));
 				writer.close();
 			} catch (IOException ioe) {
 				ioe.printStackTrace();
@@ -25,7 +25,7 @@ public class HighScore {
 		}
 
 	}
-	
+
 	public int getHighScore() {
 		int highScore = 0;
 
@@ -44,5 +44,5 @@ public class HighScore {
 
 		return highScore;
 	}
-	
+
 }
