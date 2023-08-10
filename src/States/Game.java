@@ -23,7 +23,10 @@ public class Game extends Pane {
 	private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 	private ArrayList<EnemyShooter> enemieShooters = new ArrayList<EnemyShooter>();
 	private ArrayList<LaserBeam> laserBeams = new ArrayList<LaserBeam>();
-	private Text scoreText, livesText, gameOverText, instrcutionsText;
+	private Text scoreText;
+	private Text livesText;
+	private Text gameOverText;
+	private Text instrcutionsText;
 	private boolean isGameOver = false;
 	private AnimationTimer gameLoop;
 
@@ -175,6 +178,20 @@ public class Game extends Pane {
 
 	}
 
+	public void startGame() {
+		gameLoop.start();
+	}
+
+	public void stopGame() {
+		isGameOver = true;
+		HighScore highScore = new HighScore();
+		highScore.saveScore(player.getScore());
+	}
+
+	public void handleKeyPress(KeyCode keyCode) {
+		player.move(keyCode);
+	}
+
 	private Enemy collisions(Enemy enemy, Enemy enemyTmp) {
 		if (enemy.slipsByPlayer() || enemy.playerEnemyCollision(player)) {
 			getChildren().remove(enemy.getEnemyImageView());
@@ -191,10 +208,6 @@ public class Game extends Pane {
 		}
 	}
 
-	public void handleKeyPress(KeyCode keyCode) {
-		player.move(keyCode);
-	}
-
 	private Text createText(double x, double y, String text, int size) {
 		Text t = new Text(x, y, text);
 		t.setFont(Font.font(Constants.font, size));
@@ -202,20 +215,10 @@ public class Game extends Pane {
 		return t;
 	}
 
-	public void startGame() {
-		gameLoop.start();
-	}
-
 	private void checkGameStatus() {
 		if (player.getLives() == 0) {
 			stopGame();
 		}
-	}
-
-	public void stopGame() {
-		isGameOver = true;
-		HighScore highScore = new HighScore();
-		highScore.saveScore(player.getScore());
 	}
 
 }

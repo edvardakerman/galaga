@@ -20,7 +20,10 @@ public class Main extends Application {
 	private Scene menuScene;
 	private Scene gameScene;
 	private Game game;
-	// HighScore highScore = new HighScore();
+
+	public static void main(String[] args) {
+		launch(args);
+	}
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -60,9 +63,5 @@ public class Main extends Application {
 	private void createGameScene(GameMode gameMode) {
 		game = new Game(gameMode);
 		gameScene = new Scene(game, Constants.screenWidth, Constants.screenHeight);
-	}
-
-	public static void main(String[] args) {
-		launch(args);
 	}
 }

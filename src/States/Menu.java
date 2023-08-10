@@ -20,12 +20,14 @@ import javafx.scene.text.Text;
 
 public class Menu extends VBox {
 
-	private Button startBtn, exitBtn, switchGameModeBtn;
+	private Button startBtn;
+	private Button exitBtn;
+	private Button switchGameModeBtn;
 	private Text highScoreText;
 	private ImageView galagaImageView;
 	private Runnable onStartGame;
-	HighScore highScore = new HighScore();
-	GameMode gameMode = new GameMode("Classic");
+	private HighScore highScore = new HighScore();
+	private GameMode gameMode = new GameMode("Classic");
 
 	public Menu() {
 		setStyle(Constants.Blackbackground);
@@ -69,6 +71,14 @@ public class Menu extends VBox {
 		this.onStartGame = onStartGame;
 	}
 
+	public GameMode getGameMode() {
+		return gameMode;
+	}
+
+	public void updateHighScore() {
+		highScoreText.setText("HighScore: " + highScore.getHighScore());
+	}
+
 	private void switchGameModeBtnAction() {
 		gameMode.switchGameMode();
 		setStyle(gameMode.getBackgroundColor());
@@ -80,14 +90,6 @@ public class Menu extends VBox {
 		btn.setFont(Font.font(Constants.font, size));
 		btn.setStyle("-fx-focus-color: transparent;");
 		return btn;
-	}
-
-	public GameMode getGameMode() {
-		return gameMode;
-	}
-
-	public void updateHighScore() {
-		highScoreText.setText("HighScore: " + highScore.getHighScore());
 	}
 
 }
