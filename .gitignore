@@ -2,3 +2,7 @@ bin/
 
 
 *.class
+.project
+.classpath
+.idea
+.DS_Store
