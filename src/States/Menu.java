@@ -25,7 +25,6 @@ public class Menu extends VBox {
 	private Button switchGameModeBtn;
 	private Text highScoreText;
 	private ImageView galagaImageView;
-	private Runnable onStartGame;
 	private HighScore highScore = new HighScore();
 	private GameMode gameMode = new GameMode("Classic");
 
@@ -48,11 +47,6 @@ public class Menu extends VBox {
 		highScoreText.setFill(Color.WHITE);
 
 		startBtn = createButton("Start Game", 20);
-		startBtn.setOnAction(event -> {
-			if (onStartGame != null) {
-				onStartGame.run();
-			}
-		});
 
 		switchGameModeBtn = createButton("Classic", 15);
 		switchGameModeBtn.setOnAction(event -> {
@@ -67,8 +61,8 @@ public class Menu extends VBox {
 		getChildren().addAll(galagaImageView, startBtn, switchGameModeBtn, exitBtn, highScoreText);
 	}
 
-	public void setOnStartGame(Runnable onStartGame) {
-		this.onStartGame = onStartGame;
+	public Button getStartBtn() {
+		return startBtn;
 	}
 
 	public GameMode getGameMode() {
