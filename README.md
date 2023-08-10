@@ -3,9 +3,9 @@
 # The Mission
 Earth is about to be invaded by alien an enemies. 
 Protect our home and join the battle in outer space against these extra terrestrial foes.
-The worlds faith is in your hands!
+The worlds faith is in your hands!!
 </br>
-<img src="src/Public/Screenshots/gameplay.png" width="400" height="400">
+<img src="src/Public/Screenshots/gameplay.png" width="400" height="400" style="float:left; padding:10px">
 
 ## Rules
 - You have three lives.
