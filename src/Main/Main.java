@@ -38,20 +38,20 @@ public class Main extends Application {
 
 	private void createMenuScene() {
 		Menu menu = new Menu();
-		menu.setOnStartGame(() -> {
 
+		menu.getStartBtn().setOnAction(event -> {
 			createGameScene(menu.getGameMode());
 			primaryStage.setScene(gameScene);
 
 			game.startGame();
 
-			gameScene.setOnKeyPressed(event -> {
-				if (event.getCode() == KeyCode.ESCAPE) {
+			gameScene.setOnKeyPressed(key -> {
+				if (key.getCode() == KeyCode.ESCAPE) {
 					game.stopGame();
 					primaryStage.setScene(menuScene);
 					menu.updateHighScore();
 				} else {
-					game.handleKeyPress(event.getCode());
+					game.handleKeyPress(key.getCode());
 				}
 			});
 
